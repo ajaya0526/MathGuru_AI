@@ -1,0 +1,15 @@
+name: mathguru_flutter
+description: MathGuru AI with camera, file upload, and webview support
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.7.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_inappwebview: ^6.0.0-beta.25
+  permission_handler: ^11.4.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🤖 MathGuru AI Chat Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: sans-serif;
+    }
+
+    .chat-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      padding: 10px 15px;
+      margin-bottom: 12px;
+      border-radius: 20px;
+      word-wrap: break-word;
+      font-size: 16px;
+    }
+
+    .user-message {
+      background: #d1e7dd;
+      text-align: right;
+    }
+
+    .bot-message {
+      background: #e2e3e5;
+      text-align: left;
+    }
+
+    #chatBox {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      background: #fefefe;
+    }
+
+    .typing {
+      font-style: italic;
+      color: gray;
+    }
+
+    @media (max-width: 768px) {
+      .chat-container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      .input-group {
+        flex-direction: column;
+      }
+
+      .input-group input,
+      .input-group .send-btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+      }
+
+      .form-check-inline {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container chat-container">
+  <h4 class="text-center mb-3">🤖 MathGuru AI Chat Assistant</h4>
+
+  <div id="chatBox"></div>
+
+  <!-- Chat Input -->
+  <div class="input-group mb-2">
+    <input type="text" id="chatInput" class="form-control" placeholder="Type your math question or ask for a hint...">
+    <button class="btn btn-primary send-btn" onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- Language Toggle -->
+  <div class="d-flex justify-content-start mb-3 flex-wrap">
+    <div class="form-check form-check-inline me-3">
+      <input class="form-check-input" type="radio" name="langToggle" id="langEN" value="en" checked>
+      <label class="form-check-label" for="langEN">English</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="langToggle" id="langHI" value="hi">
+      <label class="form-check-label" for="langHI">Hindi</label>
+    </div>
+  </div>
+
+  <!-- Back to Home Button -->
+  <div class="text-center">
+    <a href="/" class="btn btn-outline-secondary w-100">🔙 Back to Home</a>
+  </div>
+</div>
+
+<!-- JavaScript Logic -->
+<script>
+  function appendMessage(sender, text, className) {
+    const chatBox = document.getElementById("chatBox");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `message ${className}`;
+    messageDiv.innerHTML = `<div><strong>${sender}:</strong></div><div>${text}</div>`;
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function sendMessage() {
+    const inputField = document.getElementById("chatInput");
+    const userText = inputField.value.trim();
+    if (!userText) return;
+
+    const lang = document.querySelector('input[name="langToggle"]:checked').value;
+
+    appendMessage("You", userText, "user-message");
+    inputField.value = "";
+
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "message bot-message typing";
+    typingDiv.id = "typing-indicator";
+    typingDiv.innerHTML = "<i>🤖 Typing...</i>";
+    document.getElementById("chatBox").appendChild(typingDiv);
+
+    fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userText, lang: lang })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("typing-indicator").remove();
+      appendMessage("MathGuru", data.reply, "bot-message");
+
+      const audioSrc = lang === 'hi' ? data.audio_hi : data.audio_en;
+      if (audioSrc) {
+        const audio = new Audio(audioSrc);
+        audio.play();
+      }
+    })
+    .catch(error => {
+      document.getElementById("typing-indicator").remove();
+      appendMessage("MathGuru", "⚠️ Server error. Try again.", "bot-message");
+      console.error(error);
+    });
+  }
+
+  document.getElementById("chatInput").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>

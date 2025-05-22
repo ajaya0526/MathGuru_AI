@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>✍️ Manual Solver | MathGuru AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5fafd;
+      margin: 0;
+      padding: 0 15px;
+    }
+
+    nav {
+      background-color: #0077b6;
+      padding: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav div {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 8px 4px;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background-color: #219ebc;
+      color: white;
+    }
+
+    .btn-success {
+      background-color: #38b000;
+      color: white;
+    }
+
+    .btn-warning {
+      background-color: #ffb703;
+      color: black;
+    }
+
+    .btn-secondary {
+      background-color: #adb5bd;
+      color: black;
+    }
+
+    h2, h3 {
+      margin-top: 25px;
+      color: #023047;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 600px;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    pre {
+      background-color: #f1f1f1;
+      padding: 12px;
+      border-radius: 10px;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    audio {
+      margin-top: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav div, .btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      h2, h3 {
+        font-size: 1.25rem;
+      }
+
+      input[type="text"] {
+        font-size: 1rem;
+      }
+
+      pre {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔝 Navbar -->
+  <nav>
+    <div>✍️ Manual Math Solver</div>
+    <div>
+      <button onclick="window.location.href='/'" class="btn btn-secondary">🏠 Home</button>
+      <button onclick="toggleTheme()" class="btn btn-warning">🌓 Toggle Theme</button>
+    </div>
+  </nav>
+
+  <!-- Input Section -->
+  <h2>Type Your Math Expression</h2>
+  <p>Example: <code>3 * (4 + 2)</code>, <code>2x + 5 = 15</code>, <code>sqrt(25)</code></p>
+
+  <input type="text" id="manualInput" placeholder="Enter math expression..." />
+  <button id="manualBtn" class="btn btn-primary">🧠 Solve with MathGuru</button>
+
+  <hr style="margin: 40px 0;">
+
+  <!-- 📋 Output Section -->
+  <h3>📋 Extracted Expression:</h3>
+  <p><b>Input:</b> <span id="text">Waiting...</span></p>
+
+  <h3>✅ Answer:</h3>
+  <p><b>Result:</b> <span id="result">--</span></p>
+
+  <h3>📘 Full Explanation:</h3>
+  <pre id="steps">--</pre>
+
+  <!-- 🔊 Audio Feedback -->
+  <div style="margin-top: 20px;">
+    <audio id="feedbackAudio" style="display:none;" controls></audio>
+    <div>
+      <button onclick="playEnglishAudio()" class="btn btn-success">🔊 Play English</button>
+      <button onclick="playHindiAudio()" class="btn btn-warning">🗣️ Speak Hindi</button>
+    </div>
+  </div>
+
+  <div style="margin-top: 30px;">
+    <button onclick="window.location.href='/'" class="btn btn-secondary">🔙 Back to Home</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/hindi_audio.js"></script>
+
+</body>
+</html>

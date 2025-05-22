@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📷 Camera OCR | MathGuruAI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body.dark-theme { background-color: #121212; color: #f0f0f0; }
+    nav {
+      background-color: #0077b6;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      padding: 10px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #023e8a;
+      color: white;
+    }
+    .btn.secondary {
+      background-color: #90e0ef;
+      color: black;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+    video, canvas, img, input[type="file"] {
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    @media (max-width: 600px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div style="color:white; font-weight:bold;">📸 Camera OCR Mode</div>
+  <div>
+    <button onclick="window.location.href='/'" class="btn">🏠 Home</button>
+    <button onclick="window.location.href='/chat'" class="btn">💬 Chat with AI</button>
+    <button onclick="window.location.href='/hints'" class="btn">💡 Hints</button>
+    <button onclick="window.location.href='/history'" class="btn">📚 History</button>
+    <button onclick="window.location.href='/feedback'" class="btn">📝 Feedback</button>
+    <button onclick="window.location.href='/logout'" class="btn">🚪 Logout</button>
+    <button onclick="toggleTheme()" class="btn secondary">🌓 Toggle Theme</button>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>📷 Capture Math Problem</h2>
+
+  <video id="camera" autoplay playsinline></video>
+  <canvas id="snapshot" style="display:none;"></canvas>
+  <img id="capturedImage" alt="Captured Image" style="display:none;" />
+
+  <br>
+  <button id="openCameraBtn" class="btn">📸 Open Camera</button>
+  <button id="solveBtn" class="btn secondary" style="display:none;">✅ Solve Captured Picture</button>
+
+  <input type="file" id="fileInput" accept="image/*" capture="environment" style="display:none;" />
+  <p id="fallbackNotice" style="color:red; display:none;">⚠️ No live camera. Use upload below.</p>
+
+  <h3>📋 Extracted Input:</h3>
+  <p><b>Input:</b> <span id="text">Waiting...</span></p>
+
+  <h3>✅ Final Answer:</h3>
+  <p><b>Answer:</b> <span id="result">--</span></p>
+
+  <h3>📘 Explanation:</h3>
+  <pre id="steps">Waiting for explanation...</pre>
+
+  <div id="audioControls" style="display:none;">
+    <h4>🔊 Audio:</h4>
+    <button onclick="playAudio(audioEn)" class="btn">▶️ English</button>
+    <button onclick="playAudio(audioHi)" class="btn">🗣️ Hindi</button>
+    <button onclick="stopAudio()" class="btn secondary">⏹️ Stop</button>
+  </div>
+</div>
+
+<script>
+let stream, currentAudio = null, audioEn = '', audioHi = '';
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-theme");
+  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+}
+if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-theme");
+
+async function startCamera() {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+    document.getElementById('camera').srcObject = stream;
+    document.getElementById('camera').style.display = 'block';
+    document.getElementById('solveBtn').style.display = 'inline-block';
+  } catch (err) {
+    document.getElementById('camera').style.display = 'none';
+    document.getElementById('solveBtn').style.display = 'none';
+    document.getElementById('fallbackNotice').style.display = 'block';
+    document.getElementById('fileInput').style.display = 'block';
+  }
+}
+
+document.getElementById("openCameraBtn").addEventListener("click", startCamera);
+
+document.getElementById("solveBtn").addEventListener("click", () => {
+  const video = document.getElementById("camera");
+  const canvas = document.getElementById("snapshot");
+  const img = document.getElementById("capturedImage");
+  const ctx = canvas.getContext("2d");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  img.src = canvas.toDataURL("image/jpeg");
+  img.style.display = 'block';
+
+  canvas.toBlob(blob => {
+    const formData = new FormData();
+    formData.append("image", blob, "capture.jpg");
+
+    fetch("/upload", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("text").innerText = data.extracted || "---";
+      document.getElementById("result").innerText = data.result || "--";
+      document.getElementById("steps").innerText = data.steps || "No explanation.";
+      audioEn = '/' + data.audio_en;
+      audioHi = '/' + data.audio_hi;
+      document.getElementById("audioControls").style.display = "block";
+    });
+  }, "image/jpeg");
+});
+
+function playAudio(src) {
+  stopAudio();
+  currentAudio = new Audio(src);
+  currentAudio.play();
+}
+function stopAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+</script>
+
+</body>
+</html>

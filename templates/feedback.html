@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback | MathGuru AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0077b6;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 5px 0 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #0077b6;
+            color: white;
+        }
+
+        .btn.secondary {
+            background-color: #adb5bd;
+            color: black;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .btn, .btn.secondary {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>💬 Your Feedback</h1>
+
+    <form action="/submit-feedback" method="POST" onsubmit="return confirm('✅ Submit your feedback?')">
+        <!-- Name -->
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Anonymous">
+
+        <!-- Message -->
+        <label for="message">What did you like?</label>
+        <textarea name="message" id="message" rows="5" placeholder="Your thoughts..."></textarea>
+
+        <!-- Rating -->
+        <label for="rating">Rate Us:</label>
+        <select name="rating" id="rating">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+        <!-- Buttons -->
+        <button type="submit" class="btn">✅ Submit</button>
+        <button type="button" onclick="window.location.href='/'" class="btn secondary">🔙 Back</button>
+    </form>
+</body>
+</html>

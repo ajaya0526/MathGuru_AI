@@ -1,0 +1,273 @@
+<!-- ✅ REPLACE FULL HTML WITH THIS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📸 MathGuru AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body.dark-theme { background-color: #121212; color: #f0f0f0; }
+    .navbar {
+      background-color: #0077b6;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      flex-wrap: wrap;
+    }
+    .nav-brand { font-size: 24px; font-weight: bold; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0; padding: 0;
+    }
+    .nav-links li { display: inline; }
+    .nav-links a, .theme-btn {
+      text-decoration: none;
+      color: white;
+      background-color: #023e8a;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-links a:hover, .theme-btn:hover {
+      background-color: #90e0ef;
+      color: black;
+    }
+    .hamburger {
+      display: none;
+      font-size: 26px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links { flex-direction: column; width: 100%; display: none; margin-top: 10px; }
+      .nav-links.show { display: flex; }
+      .hamburger { display: block; }
+    }
+    .container { text-align: center; padding: 20px; }
+    video, canvas, img, input[type="file"] {
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    body.dark-theme pre {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    #audioControls button, #finalAudioControls button { margin: 5px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">📸 MathGuru AI</div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="/">🏠 Home</a></li>
+    <li><a href="/chat">💬 Chat with AI</a></li>
+    <li><a href="/hints">💡 Hints</a></li>
+    <li><a href="/history">📚 History</a></li>
+    <li><a href="/feedback">📝 Feedback</a></li>
+    <li><a href="/logout">🚪 Logout</a></li>
+    <li><button onclick="toggleTheme()" class="theme-btn">🌓 Theme</button></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>📷 Solve Math Problems with AI</h2>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="uploadFile" accept="image/*" required>
+    <br>
+    <img id="previewImage" alt="Uploaded Preview" style="display:none;" />
+    <br>
+    <button type="submit" class="btn">📤 Scan Image</button>
+  </form>
+
+  <h3>✍️ Or Type a Math Problem</h3>
+  <form id="manualForm">
+    <input type="text" id="manualInput" placeholder="Enter math expression..." required style="padding:10px; width:80%;">
+    <button type="submit" class="btn">💡 Solve Manually</button>
+  </form>
+
+  <h3>📋 Extracted Input:</h3>
+  <p><b>Input:</b> <span id="text">Waiting...</span></p>
+
+  <h3>💡 Current Hint:</h3>
+  <p id="hintText">Waiting for hint...</p>
+  <button id="prevHintBtn" class="btn" style="display:none;">⬅️ Previous Hint</button>
+  <button onclick="getNextHint()" class="btn">➡️ Next Hint</button>
+
+  <div id="audioControls" style="display:none;">
+    <h4>🔊 Hint Audio:</h4>
+    <button onclick="playAudio(hintAudioEn)" class="btn">▶️ English</button>
+    <button onclick="playAudio(hintAudioHi)" class="btn">🗣️ Hindi</button>
+    <button onclick="stopAudio()" class="btn secondary">⏹️ Stop</button>
+  </div>
+
+  <h3>✅ Final Answer:</h3>
+  <p><b>Answer:</b> <span id="result">--</span></p>
+  <button onclick="getFinalAnswer()" class="btn secondary">✅ Final Answer</button>
+
+  <h3>📘 Explanation:</h3>
+  <pre id="steps">Waiting for explanation...</pre>
+
+  <div id="finalAudioControls" style="display:none;">
+    <h4>🔊 Final Explanation Audio:</h4>
+    <button onclick="playAudio(finalAudioEn)" class="btn">▶️ English</button>
+    <button onclick="playAudio(finalAudioHi)" class="btn">🗣️ Hindi</button>
+    <button onclick="stopAudio()" class="btn secondary">⏹️ Stop</button>
+  </div>
+</div>
+
+<script>
+let hintHistory = [], currentHintIndex = -1;
+let hintAudioEn = '', hintAudioHi = '';
+let finalAudioEn = '', finalAudioHi = '';
+let currentAudio = null;
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-theme");
+  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+}
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-theme");
+}
+
+function toggleMenu() {
+  document.getElementById('navMenu').classList.toggle('show');
+}
+
+function playAudio(src) {
+  stopAudio();
+  currentAudio = new Audio(src);
+  currentAudio.play();
+}
+function stopAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+function updateHintDisplay() {
+  document.getElementById('hintText').innerText = hintHistory[currentHintIndex];
+  document.getElementById('prevHintBtn').style.display = currentHintIndex > 0 ? "inline-block" : "none";
+  document.getElementById('audioControls').style.display = "block";
+  // Do not append hints to explanation anymore
+}
+
+document.getElementById('prevHintBtn').addEventListener("click", () => {
+  if (currentHintIndex > 0) {
+    currentHintIndex--;
+    updateHintDisplay();
+  }
+});
+
+async function getNextHint() {
+  const response = await fetch('/next_hint', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: document.getElementById('text').innerText })
+  });
+  const data = await response.json();
+  if (data.hint) {
+    hintHistory.push(data.hint);
+    currentHintIndex++;
+    updateHintDisplay();
+
+    hintAudioEn = '/' + data.audio_en;
+    hintAudioHi = '/' + data.audio_hi;
+  }
+}
+
+async function getFinalAnswer() {
+  const response = await fetch('/final_answer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: document.getElementById('text').innerText })
+  });
+  const data = await response.json();
+  alert("✅ Final answer and explanation generated successfully!");
+
+  document.getElementById('result').innerText = data.answer || '--';
+
+  // 🧠 Clear previous explanation and only show final explanation
+  document.getElementById('steps').innerText = `🧠 Final Explanation:\n${data.explanation || '--'}`;
+
+  finalAudioEn = '/' + data.audio_en;
+  finalAudioHi = '/' + data.audio_hi;
+  document.getElementById("finalAudioControls").style.display = "block";
+}
+
+document.getElementById("uploadForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const file = document.getElementById("uploadFile").files[0];
+  const img = document.getElementById("previewImage");
+  img.src = URL.createObjectURL(file);
+  img.style.display = "block";
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/scan_image", {
+    method: "POST",
+    body: formData
+  }).then(res => res.json())
+    .then(data => {
+      alert("✅ Image scanned successfully!");
+      document.getElementById("text").innerText = data.extracted || "---";
+      document.getElementById("result").innerText = "--";
+      document.getElementById("steps").innerText = "";
+      hintHistory = [data.hint];
+      currentHintIndex = 0;
+      updateHintDisplay();
+
+      hintAudioEn = '/' + data.audio_en;
+      hintAudioHi = '/' + data.audio_hi;
+    });
+});
+
+document.getElementById("manualForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const expression = document.getElementById("manualInput").value.trim();
+  fetch("/manual", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ expression })
+  }).then(res => res.json())
+    .then(data => {
+      alert("✅ Problem submitted successfully!");
+      document.getElementById("text").innerText = data.extracted || expression;
+      document.getElementById("result").innerText = "--";
+      document.getElementById("steps").innerText = "";
+      hintHistory = [data.hint];
+      currentHintIndex = 0;
+      updateHintDisplay();
+
+      hintAudioEn = '/' + data.audio_en;
+      hintAudioHi = '/' + data.audio_hi;
+    });
+});
+</script>
+
+</body>
+</html>

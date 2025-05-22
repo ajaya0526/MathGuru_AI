@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MathGuru AI - Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f6faff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3, h4 {
+      color: #023047;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      margin: 6px 6px 6px 0;
+      cursor: pointer;
+      background-color: #0077b6;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1, h2, h3, h4 {
+        font-size: 1.3rem;
+      }
+
+      button {
+        width: 100%;
+        margin: 8px 0;
+      }
+
+      audio {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>📋 Extracted Input:</h1>
+    <p><strong>Input:</strong> {{ input_text }}</p>
+
+    {% if audio_file_en %}
+      <h2>🔊 English Audio:</h2>
+      <audio controls>
+        <source src="/{{ audio_file_en }}" type="audio/mpeg">
+      </audio>
+    {% endif %}
+
+    {% if audio_file_hi %}
+      <h2>🔊 Hindi Audio:</h2>
+      <audio controls>
+        <source src="/{{ audio_file_hi }}" type="audio/mpeg">
+      </audio>
+    {% endif %}
+
+    {% if first_hint %}
+      <hr>
+      <h2>💡 First Hint:</h2>
+      <p id="hintText">{{ first_hint }}</p>
+
+      <div id="hintAudioControls">
+        <h4>🔊 Hint Audio:</h4>
+        <button onclick="playAudio('/{{ audio_file_en }}')">▶️ English</button>
+        <button onclick="playAudio('/{{ audio_file_hi }}')">▶️ Hindi</button>
+        <button onclick="stopAudio()">⏹️ Stop</button>
+      </div>
+    {% endif %}
+
+    {% if show_result %}
+      <hr>
+      <h3>Next Step:</h3>
+      <form action="/" method="GET">
+        <button type="submit">🏠 Back to Home</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <script>
+    let currentAudio = null;
+
+    function playAudio(src) {
+      stopAudio();
+      currentAudio = new Audio(src);
+      currentAudio.play();
+    }
+
+    function stopAudio() {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,785 @@
+2025-05-08 03:49:24.735171 - Starting OCR for uploads\Test.png
+2025-05-08 03:49:24.735171 - Trying Gemini Vision...
+2025-05-08 03:49:27.769871 - Gemini Error: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
+2025-05-08 03:49:27.774625 - Trying Tesseract OCR...
+2025-05-08 03:49:28.722233 - Tesseract Output: 2+2x3
+2025-05-08 09:58:22.555254 - Starting OCR for uploads\math.jpg
+2025-05-08 09:58:22.557604 - Trying Gemini Vision...
+2025-05-08 09:58:23.149911 - Gemini Error: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
+2025-05-08 09:58:23.149911 - Trying Tesseract OCR...
+2025-05-08 09:58:24.110329 - Tesseract Output: ay
+bh i
+2025-05-08 10:07:27.219116 - Starting OCR for uploads\Test.png
+2025-05-08 10:07:27.223547 - Trying Gemini Vision...
+2025-05-08 10:07:32.245533 - Gemini Output: 2+2×3
+2025-05-08 10:44:00.298648 - Starting OCR for uploads\Test.png
+2025-05-08 10:44:00.304617 - Trying Gemini Vision...
+2025-05-08 10:44:05.953077 - Gemini Output: 2+2×3
+2025-05-08 11:22:42.615926 - Starting OCR for uploads\Test.png
+2025-05-08 11:22:42.620213 - Trying Gemini Vision...
+2025-05-08 11:22:46.015607 - Gemini Output: 2 + 2 x 3
+2025-05-08 11:33:04.767040 - Starting OCR for uploads\Test.png
+2025-05-08 11:33:04.767040 - Trying Gemini Vision...
+2025-05-08 11:33:09.663809 - Gemini Output: 2+2×3
+2025-05-08 11:41:33.458023 - Starting OCR for uploads\Test.png
+2025-05-08 11:41:33.458023 - Trying Gemini Vision...
+2025-05-08 11:41:38.302493 - Gemini Output: 2 + 2 x 3
+2025-05-08 11:49:50.188394 - Starting OCR for uploads\Test.png
+2025-05-08 11:49:50.188394 - Trying Gemini Vision...
+2025-05-08 11:49:53.311299 - Gemini Output: 2+2×3
+2025-05-08 11:58:14.868029 - Starting OCR for uploads\Test.png
+2025-05-08 11:58:14.868029 - Trying Gemini Vision...
+2025-05-08 11:58:18.485892 - Gemini Output: 2 + 2 x 3
+2025-05-08 12:02:37.920197 - Starting OCR for uploads\Test.png
+2025-05-08 12:02:37.920197 - Trying Gemini Vision...
+2025-05-08 12:02:41.038156 - Gemini Output: 2+2×3
+2025-05-08 12:05:40.159430 - Starting OCR for uploads\Test.png
+2025-05-08 12:05:40.160722 - Trying Gemini Vision...
+2025-05-08 12:05:41.867937 - Gemini Output: 2+2×3
+2025-05-08 12:15:51.027679 - Starting OCR for uploads\camera_capture.jpg
+2025-05-08 12:15:51.028797 - Trying Gemini Vision...
+2025-05-08 12:15:53.962840 - Gemini Output: I'm sorry, I couldn't find the math expression or equation in this image.
+2025-05-08 12:51:47.373461 - Starting OCR for uploads\Test.png
+2025-05-08 12:51:47.373461 - Trying Gemini Vision...
+2025-05-08 12:51:52.419630 - Gemini Output: 2+2×3
+2025-05-08 13:02:58.387984 - Starting OCR for uploads\Test.png
+2025-05-08 13:02:58.390831 - Trying Gemini Vision...
+2025-05-08 13:03:03.302195 - Gemini Output: 2+2×3
+2025-05-08 13:08:48.502892 - Starting OCR for uploads\Test.png
+2025-05-08 13:08:48.502892 - Trying Gemini Vision...
+2025-05-08 13:08:52.171168 - Gemini Output: 2+2×3
+2025-05-08 13:28:58.497849 - Starting OCR for uploads\Test.png
+2025-05-08 13:28:58.497849 - Trying Gemini Vision...
+2025-05-08 13:29:01.862660 - Gemini Output: 2+2×3
+2025-05-08 13:42:45.282724 - Starting OCR for uploads\Test.png
+2025-05-08 13:42:45.286575 - Trying Gemini Vision...
+2025-05-08 13:42:48.564266 - Gemini Output: 2+2×3
+2025-05-08 13:43:07.504149 - Starting OCR for uploads\camera_capture.jpg
+2025-05-08 13:43:07.504149 - Trying Gemini Vision...
+2025-05-08 13:43:09.637351 - Gemini Output: I am unable to extract any math expression or equation from this image.
+2025-05-09 02:29:56.830574 - Starting OCR for uploads\Test.png
+2025-05-09 02:29:56.831577 - Trying Gemini Vision...
+2025-05-09 02:30:00.931610 - Gemini Output: 2+2×3
+2025-05-08 23:15:32.684659 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:32.684976 - Trying Gemini Vision...
+2025-05-08 23:15:36.052362 - Gemini Output: 3+3
+2025-05-08 23:15:36.053212 - Trying Tesseract OCR...
+2025-05-08 23:15:36.320394 - Tesseract Output: oo
+2025-05-08 23:15:36.320498 - Trying EasyOCR...
+2025-05-08 23:15:42.505941 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:42.506039 - Trying Gemini Vision...
+2025-05-08 23:15:42.697988 - EasyOCR Output: t
+2025-05-08 23:15:42.698097 - OCR Failed. No valid result extracted.
+2025-05-08 23:15:43.254952 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:43.255085 - Trying Gemini Vision...
+2025-05-08 23:15:44.354149 - Gemini Output: 3+3
+2025-05-08 23:15:44.354553 - Trying Tesseract OCR...
+2025-05-08 23:15:44.462053 - Tesseract Output: oo
+2025-05-08 23:15:44.462161 - Trying EasyOCR...
+2025-05-08 23:15:45.166923 - Gemini Output: 3+3
+2025-05-08 23:15:45.167921 - Trying Tesseract OCR...
+2025-05-08 23:15:45.413695 - Tesseract Output: oo
+2025-05-08 23:15:45.413839 - Trying EasyOCR...
+2025-05-08 23:15:45.979509 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:45.979571 - Trying Gemini Vision...
+2025-05-08 23:15:46.311843 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:46.311899 - Trying Gemini Vision...
+2025-05-08 23:15:47.118949 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:47.119387 - Trying Gemini Vision...
+2025-05-08 23:15:47.328714 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:47.328822 - Trying Gemini Vision...
+2025-05-08 23:15:47.868652 - Gemini Output: 3+3
+2025-05-08 23:15:47.868848 - Trying Tesseract OCR...
+2025-05-08 23:15:48.009106 - Tesseract Output: oo
+2025-05-08 23:15:48.009198 - Trying EasyOCR...
+2025-05-08 23:15:48.691668 - Gemini Output: 3 + 3
+2025-05-08 23:15:48.895827 - Gemini Output: 3 + 3
+2025-05-08 23:15:49.762917 - Gemini Output: 3 + 3
+2025-05-08 23:15:49.916263 - Starting OCR for uploads/test.jpg
+2025-05-08 23:15:49.916314 - Trying Gemini Vision...
+2025-05-08 23:15:52.486319 - Gemini Output: 3+3
+2025-05-08 23:15:52.487085 - Trying Tesseract OCR...
+2025-05-08 23:15:52.671655 - Tesseract Output: oo
+2025-05-08 23:15:52.671766 - Trying EasyOCR...
+2025-05-08 23:16:03.130775 - EasyOCR Output: t
+2025-05-08 23:16:03.130881 - OCR Failed. No valid result extracted.
+2025-05-08 23:16:05.047205 - EasyOCR Output: t
+2025-05-08 23:16:05.047300 - OCR Failed. No valid result extracted.
+2025-05-08 23:16:05.262504 - EasyOCR Output: t
+2025-05-08 23:16:05.262883 - OCR Failed. No valid result extracted.
+2025-05-08 23:16:05.626319 - EasyOCR Output: t
+2025-05-08 23:16:05.626411 - OCR Failed. No valid result extracted.
+2025-05-08 23:16:22.633562 - Starting OCR for uploads/test.jpg
+2025-05-08 23:16:22.633687 - Trying Gemini Vision...
+2025-05-08 23:16:24.362473 - Gemini Output: 3+3
+2025-05-08 23:16:24.362916 - Trying Tesseract OCR...
+2025-05-08 23:16:24.483535 - Tesseract Output: oo
+2025-05-08 23:16:24.483629 - Trying EasyOCR...
+2025-05-08 23:16:28.742855 - EasyOCR Output: t
+2025-05-08 23:16:28.742943 - OCR Failed. No valid result extracted.
+2025-05-08 23:28:19.646316 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:28:19.646461 - Trying Gemini Vision...
+2025-05-08 23:28:21.127227 - Gemini Output: 4 ÷ 0 = 6
+2025-05-08 23:28:37.659158 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:28:37.659349 - Trying Gemini Vision...
+2025-05-08 23:28:38.940624 - Gemini Output: 4 ÷ 6
+2025-05-08 23:28:54.293688 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:28:54.294007 - Trying Gemini Vision...
+2025-05-08 23:28:55.796243 - Gemini Output: 2/5
+2025-05-08 23:28:55.796738 - Trying Tesseract OCR...
+2025-05-08 23:28:55.894514 - Tesseract Output: 2y0
+q
+2025-05-08 23:29:07.092562 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:29:07.092750 - Trying Gemini Vision...
+2025-05-08 23:29:08.653412 - Gemini Output: 2/5
+2025-05-08 23:29:08.653734 - Trying Tesseract OCR...
+2025-05-08 23:29:08.776491 - Tesseract Output: 
+2025-05-08 23:29:08.776573 - Trying EasyOCR...
+2025-05-08 23:29:09.349221 - EasyOCR Output: /5
+2025-05-08 23:29:09.349334 - OCR Failed. No valid result extracted.
+2025-05-08 23:29:17.079186 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:29:17.079714 - Trying Gemini Vision...
+2025-05-08 23:29:18.288309 - Gemini Output: 2/5
+2025-05-08 23:29:18.288765 - Trying Tesseract OCR...
+2025-05-08 23:29:18.394957 - Tesseract Output: will
+2025-05-08 23:29:30.311417 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:29:30.311647 - Trying Gemini Vision...
+2025-05-08 23:29:31.790657 - Gemini Output: 2/5
+2025-05-08 23:29:31.791321 - Trying Tesseract OCR...
+2025-05-08 23:29:31.888606 - Tesseract Output: es
+q
+2025-05-08 23:33:36.565759 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:36.565930 - Trying Gemini Vision...
+2025-05-08 23:33:38.273122 - Gemini Output: 3+3
+2025-05-08 23:33:38.274040 - Trying Tesseract OCR...
+2025-05-08 23:33:41.350915 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:41.351081 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:41.351137 - Trying Gemini Vision...
+2025-05-08 23:33:41.351660 - Trying Gemini Vision...
+2025-05-08 23:33:41.423257 - Tesseract Output: oo
+2025-05-08 23:33:41.423336 - Trying EasyOCR...
+2025-05-08 23:33:43.180537 - Gemini Output: 3 + 3
+2025-05-08 23:33:43.253156 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:43.253219 - Trying Gemini Vision...
+2025-05-08 23:33:43.566833 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:43.566893 - Trying Gemini Vision...
+2025-05-08 23:33:44.016980 - Gemini Output: 3+3
+2025-05-08 23:33:44.017115 - Trying Tesseract OCR...
+2025-05-08 23:33:44.128233 - Tesseract Output: oo
+2025-05-08 23:33:44.128318 - Trying EasyOCR...
+2025-05-08 23:33:45.495662 - Gemini Output: 3+3
+2025-05-08 23:33:45.495956 - Trying Tesseract OCR...
+2025-05-08 23:33:45.628348 - Tesseract Output: oo
+2025-05-08 23:33:45.628491 - Trying EasyOCR...
+2025-05-08 23:33:45.771740 - Gemini Output: 3+3
+2025-05-08 23:33:45.771900 - Trying Tesseract OCR...
+2025-05-08 23:33:45.980384 - Tesseract Output: oo
+2025-05-08 23:33:45.980606 - Trying EasyOCR...
+2025-05-08 23:33:47.730394 - Starting OCR for uploads/test.jpg
+2025-05-08 23:33:47.733686 - Trying Gemini Vision...
+2025-05-08 23:33:49.465849 - Gemini Output: 3+3
+2025-05-08 23:33:49.466161 - Trying Tesseract OCR...
+2025-05-08 23:33:50.196769 - Tesseract Output: oo
+2025-05-08 23:33:50.196871 - Trying EasyOCR...
+2025-05-08 23:33:53.737196 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:33:53.740150 - Trying Gemini Vision...
+2025-05-08 23:33:55.471297 - Gemini Output: There is no math expression or equation in this image.
+2025-05-08 23:34:01.734694 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:34:01.734935 - Trying Gemini Vision...
+2025-05-08 23:34:01.821017 - EasyOCR Output: t
+2025-05-08 23:34:01.821438 - OCR Failed. No valid result extracted.
+2025-05-08 23:34:03.239342 - Gemini Output: 2/5
+2025-05-08 23:34:03.239600 - Trying Tesseract OCR...
+2025-05-08 23:34:03.479190 - Tesseract Output: wail
+q
+2025-05-08 23:34:07.849572 - EasyOCR Output: t
+2025-05-08 23:34:07.849669 - OCR Failed. No valid result extracted.
+2025-05-08 23:34:09.777327 - EasyOCR Output: t
+2025-05-08 23:34:09.777443 - OCR Failed. No valid result extracted.
+2025-05-08 23:34:09.796810 - EasyOCR Output: t
+2025-05-08 23:34:09.796986 - OCR Failed. No valid result extracted.
+2025-05-08 23:34:10.422164 - EasyOCR Output: t
+2025-05-08 23:34:10.422263 - OCR Failed. No valid result extracted.
+2025-05-08 23:34:17.045376 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:34:17.045557 - Trying Gemini Vision...
+2025-05-08 23:34:18.499302 - Gemini Output: 2/5
+2025-05-08 23:34:18.499697 - Trying Tesseract OCR...
+2025-05-08 23:34:18.600369 - Tesseract Output: cull  
+q
+2025-05-08 23:35:57.067891 - Starting OCR for uploads/test.jpg
+2025-05-08 23:35:57.068078 - Trying Gemini Vision...
+2025-05-08 23:35:58.766556 - Gemini Output: 3 + 3
+2025-05-08 23:37:08.297564 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:37:08.297703 - Trying Gemini Vision...
+2025-05-08 23:37:09.596964 - Gemini Output: There is no math expression or equation in this image.
+2025-05-08 23:37:36.495038 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:37:36.495194 - Trying Gemini Vision...
+2025-05-08 23:37:37.816293 - Gemini Output: 3 + 3
+2025-05-08 23:37:46.111031 - Starting OCR for uploads/camera_capture.jpg
+2025-05-08 23:37:46.111286 - Trying Gemini Vision...
+2025-05-08 23:37:47.407591 - Gemini Output: 3+3
+2025-05-08 23:37:47.407945 - Trying Tesseract OCR...
+2025-05-08 23:37:47.533388 - Tesseract Output: me
+2025-05-08 23:37:47.533519 - Trying EasyOCR...
+2025-05-08 23:37:48.127689 - EasyOCR Output: 3 +3
+2025-05-09 00:49:35.469384 - Starting OCR for uploads/camera_capture.jpg
+2025-05-09 00:49:35.469651 - Trying Gemini Vision...
+2025-05-09 00:49:36.854242 - Gemini Output: 3+3
+2025-05-09 00:49:36.855533 - Trying Tesseract OCR...
+2025-05-09 00:49:36.980499 - Tesseract Output: 
+2025-05-09 00:49:36.980607 - Trying EasyOCR...
+2025-05-09 00:49:37.645261 - EasyOCR Output: 3 +3
+2025-05-09 01:21:10.266595 - Starting OCR for uploads/test.jpg
+2025-05-09 01:21:10.266913 - Trying Gemini Vision...
+2025-05-09 01:21:12.249694 - Gemini Output: 3+3
+2025-05-09 01:21:12.250988 - Trying Tesseract OCR...
+2025-05-09 01:21:12.570382 - Tesseract Output: oo
+2025-05-09 01:21:12.570460 - Trying EasyOCR...
+2025-05-09 01:21:17.331794 - Starting OCR for uploads/test.jpg
+2025-05-09 01:21:17.331926 - Trying Gemini Vision...
+2025-05-09 01:21:19.062003 - EasyOCR Output: t
+2025-05-09 01:21:19.062129 - OCR Failed. No valid result extracted.
+2025-05-09 01:21:19.130564 - Gemini Output: 3+3
+2025-05-09 01:21:19.130684 - Trying Tesseract OCR...
+2025-05-09 01:21:19.212233 - Tesseract Output: oo
+2025-05-09 01:21:19.212301 - Trying EasyOCR...
+2025-05-09 01:21:23.828873 - Starting OCR for uploads/test.jpg
+2025-05-09 01:21:23.828964 - Trying Gemini Vision...
+2025-05-09 01:21:24.866000 - EasyOCR Output: t
+2025-05-09 01:21:24.866111 - OCR Failed. No valid result extracted.
+2025-05-09 01:21:26.001170 - Gemini Output: 3+3
+2025-05-09 01:21:26.001421 - Trying Tesseract OCR...
+2025-05-09 01:21:26.093459 - Tesseract Output: oo
+2025-05-09 01:21:26.093540 - Trying EasyOCR...
+2025-05-09 01:21:31.706610 - EasyOCR Output: t
+2025-05-09 01:21:31.706739 - OCR Failed. No valid result extracted.
+2025-05-09 01:21:39.727985 - Starting OCR for uploads/camera_capture.jpg
+2025-05-09 01:21:39.728231 - Trying Gemini Vision...
+2025-05-09 01:21:41.357985 - Gemini Output: 2/5
+2025-05-09 01:21:41.358610 - Trying Tesseract OCR...
+2025-05-09 01:21:44.460343 - Tesseract Output: 
+2025-05-09 01:21:44.460462 - Trying EasyOCR...
+2025-05-09 01:21:45.034313 - EasyOCR Output: 5
+2025-05-09 01:21:45.034450 - OCR Failed. No valid result extracted.
+2025-05-09 01:22:01.178711 - Starting OCR for uploads/camera_capture.jpg
+2025-05-09 01:22:01.179191 - Trying Gemini Vision...
+2025-05-09 01:22:02.513720 - Gemini Output: 2/5
+2025-05-09 01:22:02.514259 - Trying Tesseract OCR...
+2025-05-09 01:22:02.616266 - Tesseract Output: 7/5 os
+y
+2025-05-09 01:22:08.047052 - Starting OCR for uploads/camera_capture.jpg
+2025-05-09 01:22:08.047355 - Trying Gemini Vision...
+2025-05-09 01:22:09.250590 - Gemini Output: 2/5
+2025-05-09 01:22:09.250836 - Trying Tesseract OCR...
+2025-05-09 01:22:09.360026 - Tesseract Output: wig
+2025-05-09 01:22:09.360146 - Trying EasyOCR...
+2025-05-09 01:22:09.928148 - EasyOCR Output: /5
+2025-05-09 01:22:09.928243 - OCR Failed. No valid result extracted.
+2025-05-09 17:43:39.251706 - Starting OCR for uploads/camera_capture.jpg
+2025-05-09 17:43:39.252428 - Trying Gemini Vision...
+2025-05-09 17:43:40.742455 - Gemini Output: 1+1
+2025-05-09 17:43:40.743538 - Trying Tesseract OCR...
+2025-05-09 17:43:40.947186 - Tesseract Output: let
+2025-05-09 17:43:40.947290 - Trying EasyOCR...
+2025-05-09 17:43:41.676910 - EasyOCR Output: 
+2025-05-09 17:43:41.676998 - OCR Failed. No valid result extracted.
+2025-05-09 17:44:33.664534 - Starting OCR for uploads/test.jpg
+2025-05-09 17:44:33.664819 - Trying Gemini Vision...
+2025-05-09 17:44:35.526593 - Gemini Output: 3+3
+2025-05-09 17:44:35.526968 - Trying Tesseract OCR...
+2025-05-09 17:44:35.666677 - Tesseract Output: oo
+2025-05-09 17:44:35.666749 - Trying EasyOCR...
+2025-05-09 17:44:41.736530 - EasyOCR Output: t
+2025-05-09 17:44:41.736636 - OCR Failed. No valid result extracted.
+2025-05-09 17:44:59.897947 - Starting OCR for uploads/test.jpg
+2025-05-09 17:44:59.898102 - Trying Gemini Vision...
+2025-05-09 17:45:01.742071 - Gemini Output: 3+3
+2025-05-09 17:45:01.742390 - Trying Tesseract OCR...
+2025-05-09 17:45:04.874277 - Tesseract Output: oo
+2025-05-09 17:45:04.874351 - Trying EasyOCR...
+2025-05-09 17:45:10.009227 - EasyOCR Output: t
+2025-05-09 17:45:10.009516 - OCR Failed. No valid result extracted.
+2025-05-09 18:28:21.187404 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:28:22.826281 - [OCR Failed] Nothing detected in uploads/processed_temp.jpg
+2025-05-09 18:28:31.652454 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:28:33.108987 - [OCR Failed] Nothing detected in uploads/processed_temp.jpg
+2025-05-09 18:28:51.319680 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:28:52.767941 - [OCR Success] EasyOCR: 6#3
+2025-05-09 18:29:08.587160 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:29:10.041097 - [OCR Success] EasyOCR: 6#3
+2025-05-09 18:30:04.353568 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:30:08.779740 - [OCR Success] EasyOCR: 6+ 5
+2025-05-09 18:30:21.234405 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:30:22.529715 - [OCR Failed] Nothing detected in uploads/processed_temp.jpg
+2025-05-09 18:30:56.122630 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:30:57.466118 - [OCR Failed] Nothing detected in uploads/processed_temp.jpg
+2025-05-09 18:39:54.795789 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:39:56.417828 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 18:40:07.158917 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:40:08.801950 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 18:40:52.220883 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:40:53.458562 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 18:41:21.243837 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:41:22.713656 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 18:47:58.596744 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:47:59.994308 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 18:48:11.511950 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 18:48:12.959734 - [OCR Failed] No valid result extracted from uploads/processed_temp.jpg
+2025-05-09 19:37:48.148276 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 19:37:49.716772 - [FAIL] No valid result
+2025-05-09 19:37:57.286149 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 19:37:58.847382 - [FAIL] No valid result
+2025-05-09 19:38:12.001741 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 19:38:13.411922 - [FAIL] No valid result
+2025-05-09 19:38:35.321995 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 19:38:36.776620 - [FAIL] No valid result
+2025-05-09 19:39:50.800874 - [Gemini Error]: module 'google.generativeai' has no attribute 'upload_file'
+2025-05-09 19:39:52.165738 - [FAIL] No valid result
+2025-05-09 19:56:21.930665 - [Gemini Error]: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
+2025-05-09 19:56:23.648328 - [FAIL] No valid result
+2025-05-09 19:56:31.654973 - [Gemini Error]: 404 Gemini 1.0 Pro Vision has been deprecated on July 12, 2024. Consider switching to different model, for example gemini-1.5-flash.
+2025-05-09 19:56:36.059472 - [FAIL] No valid result
+2025-05-09 20:08:40.691454 - [SUCCESS] Gemini: There is no mathematical expression in the image.  The image is a solid black shape.
+2025-05-09 20:08:51.994289 - [FAIL] No valid result
+2025-05-09 20:08:58.820245 - [SUCCESS] Gemini: 64<sup>2</sup>
+2025-05-09 20:09:07.980822 - [SUCCESS] Gemini: 6 + 5i
+2025-05-09 20:09:44.862443 - [SUCCESS] Gemini: There is no math expression in the image.  The image is a solid black shape.
+2025-05-09 20:10:24.795693 - [FAIL] No valid result
+2025-05-09 20:10:40.101104 - [SUCCESS] Gemini: There is no math expression in the image.  The image is entirely black except for a white top edge.
+2025-05-09 20:11:51.432012 - [SUCCESS] Gemini: 6 + 14
+2025-05-09 20:12:08.293771 - [FAIL] No valid result
+2025-05-09 20:12:21.573059 - [FAIL] No valid result
+2025-05-09 20:21:28.569188 - [SUCCESS] Gemini: There is no math expression in the image.  The image is a solid black shape.
+2025-05-09 20:21:38.120737 - [SUCCESS] Tesseract: «=
+2025-05-09 20:21:47.636060 - [SUCCESS] Gemini: There is no math expression in the image.  The image is a black shape on a white background.
+2025-05-09 20:35:42.254711 - [SUCCESS] Gemini: 6 + 5 + 3
+2025-05-09 20:35:42.375774 - [SUCCESS] Tesseract: aq
+2025-05-09 20:35:43.049747 - [SUCCESS] EasyOCR: 6 + 5+3
+2025-05-09 20:35:45.735684 - [SUCCESS] Gemini: 6 + 5 + 3
+2025-05-09 20:35:45.882688 - [SUCCESS] Tesseract: "नस
+2025-05-09 20:35:46.559315 - [SUCCESS] EasyOCR: 6 + 5+3
+2025-05-09 20:35:55.566020 - [SUCCESS] Gemini: 6 + 5 + 3
+2025-05-09 20:35:56.282493 - [SUCCESS] EasyOCR: 6 + 5+3
+2025-05-09 20:36:43.285423 - [SUCCESS] Gemini: 7/3 + 8/3 + 5/3
+2025-05-09 20:36:43.425624 - [SUCCESS] Tesseract: [|
+2025-05-09 20:36:44.089250 - [SUCCESS] EasyOCR: 7/3 + %3 5/3
+2025-05-09 20:37:27.828917 - [SUCCESS] Gemini: 2 + 2
+2025-05-09 20:37:27.945845 - [SUCCESS] Tesseract: ~~
+2025-05-09 20:37:28.589314 - [SUCCESS] EasyOCR: २ + 2
+2025-05-09 20:37:43.265579 - [SUCCESS] Gemini: 3 + 3
+2025-05-09 20:37:43.426714 - [SUCCESS] Tesseract: Cy द
+.....
+2025-05-09 20:37:49.627282 - [SUCCESS] EasyOCR: /
+2025-05-09 20:47:45.405352 - [SUCCESS] Gemini: 6 + 5 + 3
+2025-05-09 20:47:46.149291 - [SUCCESS] EasyOCR: 6 + 5+ 3
+2025-05-09 20:48:57.801972 - [SUCCESS] Gemini: 3 + 3
+2025-05-09 20:48:57.958722 - [SUCCESS] Tesseract: Cy द
+.....
+2025-05-09 20:49:03.941379 - [SUCCESS] EasyOCR: /
+2025-05-09 20:49:36.407672 - [SUCCESS] Gemini: 7/3 + 8/3 + 5/3
+2025-05-09 20:49:36.549322 - [SUCCESS] Tesseract: न मु ft
+/ y
+2025-05-09 20:49:37.212618 - [SUCCESS] EasyOCR: 7/3 83 5/3
+2025-05-09 20:49:49.412380 - [SUCCESS] Gemini: 4 ÷ 6
+2025-05-09 20:50:27.266919 - [SUCCESS] Gemini: There is no math expression in the image.
+2025-05-09 20:50:30.385258 - [SUCCESS] Tesseract: ~~
+2025-05-09 20:50:31.124311 - [SUCCESS] EasyOCR: Whar is Marh
+2025-05-09 20:50:45.835274 - [SUCCESS] Gemini: There is no math expression in the image.  The image contains the question "What is math?".
+2025-05-09 20:50:49.634891 - [SUCCESS] EasyOCR: Whar i$ Marh
+2025-05-09 20:51:38.163770 - [SUCCESS] Gemini: 4x + 3 = 7
+2025-05-09 20:51:38.280562 - [SUCCESS] Tesseract: 4+ 307
+2025-05-09 20:51:38.917620 - [SUCCESS] EasyOCR: 442+ 3= 7
+2025-05-09 20:52:08.066509 - [SUCCESS] Gemini: 4x + 3 = 7
+2025-05-09 20:52:11.200955 - [SUCCESS] Tesseract: a 2-7
+2025-05-09 20:52:11.885613 - [SUCCESS] EasyOCR: 4/2+ 3- 7
+2025-05-09 20:52:57.726484 - [SUCCESS] Gemini: 2 + 3.6 - 5.09 + 0.4
+2025-05-09 20:52:57.888675 - [SUCCESS] Tesseract: 4 3.6 -5.0940°9
+2025-05-09 20:52:58.644911 - [SUCCESS] EasyOCR: 2 + 3.6-5.01+0:4
+2025-05-09 20:53:25.993941 - [SUCCESS] Gemini: 12 + 7
+2025-05-09 20:53:26.111604 - [SUCCESS] Tesseract: ie
+2025-05-09 20:53:26.778199 - [SUCCESS] EasyOCR: /2+7
+2025-05-09 20:53:38.685544 - [SUCCESS] Gemini: 200 ÷ 20
+2025-05-09 20:53:41.813735 - [SUCCESS] Tesseract: —
+2025-05-09 20:54:01.214799 - [SUCCESS] Gemini: 2/5
+2025-05-09 20:54:01.331489 - [SUCCESS] Tesseract: 4
+2025-05-09 20:54:01.957139 - [SUCCESS] EasyOCR: ~/5
+2025-05-09 20:54:14.834311 - [SUCCESS] Gemini: 6/3 + 9/3
+2025-05-09 20:54:15.580647 - [SUCCESS] EasyOCR: %3 + %|3
+2025-05-09 20:54:24.253300 - [SUCCESS] Gemini: 7/3 + 8/3 + 5/3
+2025-05-09 20:54:27.379521 - [SUCCESS] Tesseract: हल
+2025-05-09 20:54:28.191243 - [SUCCESS] EasyOCR: 7/3 83 + 5/3
+2025-05-09 23:55:53.247247 - [SUCCESS] Gemini: 7/3 + 8/3 + 5/3
+2025-05-09 23:55:53.393590 - [SUCCESS] Tesseract: yf
+2025-05-09 23:55:54.076953 - [SUCCESS] EasyOCR: ७/३ + %३ + %3
+2025-05-09 23:56:27.140926 - [SUCCESS] Gemini: 2 + 2
+2025-05-09 23:56:30.281333 - [SUCCESS] Tesseract: ea
+2025-05-09 23:56:30.954101 - [SUCCESS] EasyOCR: २ + 2
+2025-05-11 19:37:16.967040 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 19:37:17.103432 - [SUCCESS] Tesseract: a
+2025-05-11 19:37:18.015101 - [SUCCESS] EasyOCR: )$ + ० ~ Whar
+2025-05-11 19:38:21.172872 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 19:38:24.317395 - [SUCCESS] Tesseract: ys
+2025-05-11 19:38:25.200429 - [SUCCESS] EasyOCR: Wha7 )5 ~0~<=?
+2025-05-11 19:53:00.013388 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-11 19:53:00.169314 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-11 19:53:07.115939 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-11 20:00:01.100791 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:00:01.211161 - [SUCCESS] Tesseract: =
+2025-05-11 20:00:01.947263 - [SUCCESS] EasyOCR: Wha + )$ 6 +०-
+2025-05-11 20:13:18.977913 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:13:19.096029 - [SUCCESS] Tesseract: —
+2025-05-11 20:13:19.828197 - [SUCCESS] EasyOCR: Wha + i$ 6 +० -
+2025-05-11 20:14:54.002176 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:14:54.130829 - [SUCCESS] Tesseract: ia ~F
+va A
+2025-05-11 20:14:54.917874 - [SUCCESS] EasyOCR: Whar is ० +० - -?
+2025-05-11 20:16:30.566725 - [SUCCESS] Gemini: 8 + 8
+2025-05-11 20:16:31.326129 - [SUCCESS] EasyOCR: 8 +8
+2025-05-11 20:22:45.109655 - [SUCCESS] Gemini: 8 + 8
+2025-05-11 20:22:45.249065 - [SUCCESS] Tesseract: है
+2025-05-11 20:22:45.881581 - [SUCCESS] EasyOCR: 8 +8
+2025-05-11 20:28:10.239528 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:28:10.354252 - [SUCCESS] Tesseract: o-.
+2025-05-11 20:28:11.167916 - [SUCCESS] EasyOCR: )S Wha r 6 +0-<=
+2025-05-11 20:33:19.483527 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:33:19.600958 - [SUCCESS] Tesseract: a
+2025-05-11 20:33:20.416650 - [SUCCESS] EasyOCR: १5 Wha r 5 +0~4=?
+2025-05-11 20:34:35.053256 - [SUCCESS] Gemini: 6 + 6 - 4 = ?
+2025-05-11 20:34:38.187606 - [SUCCESS] Tesseract: | |
+2025-05-11 20:34:39.009442 - [SUCCESS] EasyOCR: Whar १$ 0
+2025-05-11 20:37:10.494777 - [SUCCESS] Gemini: 1a + 4 = 6
+2025-05-11 20:37:13.625884 - [SUCCESS] Tesseract: ey a
+2025-05-11 20:37:14.288825 - [SUCCESS] EasyOCR: |a +4
+2025-05-11 20:38:22.583505 - [SUCCESS] Gemini: 1a + 4 = 6
+2025-05-11 20:38:25.709220 - [SUCCESS] Tesseract: _.
+2025-05-11 20:38:26.381365 - [SUCCESS] EasyOCR: / A
+2025-05-11 20:56:33.343444 - [SUCCESS] Gemini: 2A + 3 = 7
+2025-05-11 20:56:34.038758 - [SUCCESS] Tesseract: RR
+2025-05-11 20:56:34.780421 - [SUCCESS] EasyOCR: 4+3=7
+2025-05-12 10:07:39.860550 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:07:40.836164 - [SUCCESS] EasyOCR: T3
+2025-05-12 10:22:55.628471 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:22:56.210338 - [SUCCESS] Tesseract: कि
+|
+a
+2025-05-12 10:22:56.991239 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 10:25:30.765876 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:25:30.895998 - [SUCCESS] Tesseract: >
+2025-05-12 10:25:31.549534 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 10:35:23.338657 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:35:23.495591 - [SUCCESS] Tesseract: _
+2025-05-12 10:35:24.219738 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 10:47:23.311643 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:47:24.107711 - [SUCCESS] EasyOCR: 73
+2025-05-12 10:50:25.071067 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:50:25.214752 - [SUCCESS] Tesseract: _
+2025-05-12 10:50:25.897269 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 10:51:59.072786 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:51:59.184846 - [SUCCESS] Tesseract: _
+2025-05-12 10:51:59.830047 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 10:57:24.090720 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 10:57:24.246917 - [SUCCESS] Tesseract: ; |
+2025-05-12 10:57:25.002683 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 11:00:19.318785 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 11:00:19.451540 - [SUCCESS] Tesseract: ill
+a
+2025-05-12 11:00:20.149015 - [SUCCESS] EasyOCR: 3 +3
+2025-05-12 11:14:13.569472 - [SUCCESS] Gemini: 3 + 3
+2025-05-12 11:14:13.745700 - [SUCCESS] Tesseract: का
+ry i
+if ,
+हे it
+ry iy, !
+2025-05-12 11:14:14.501046 - [SUCCESS] EasyOCR: ? +3
+2025-05-12 11:15:19.041959 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 11:15:19.233144 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 11:15:26.533597 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 11:16:39.898308 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 11:16:43.073042 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 11:16:49.894244 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 11:22:33.537790 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 11:22:33.726701 - [SUCCESS] Tesseract: a
+2025-05-12 11:22:34.342821 - [SUCCESS] EasyOCR: 5+6
+2025-05-12 11:24:51.045510 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 11:24:54.215214 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 11:25:01.711375 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 11:32:03.069520 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 11:32:03.224916 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 11:32:10.026676 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 11:37:07.169944 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 11:37:07.336221 - [SUCCESS] Tesseract: es
+» sel
+2025-05-12 11:37:07.903317 - [SUCCESS] EasyOCR: 5 +6
+2025-05-12 11:43:18.220653 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 11:43:19.301397 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 11:43:26.514068 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 11:49:48.663133 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 11:49:48.776415 - [SUCCESS] Tesseract: 5 +6
+2025-05-12 11:49:49.341259 - [SUCCESS] EasyOCR: 5+6
+2025-05-12 11:58:56.793206 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 11:58:56.908804 - [SUCCESS] Tesseract: 5 +6
+2025-05-12 11:58:57.514758 - [SUCCESS] EasyOCR: 5 +6
+2025-05-12 12:01:18.865204 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 12:01:19.018791 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 12:01:26.127313 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 12:10:46.215762 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 12:10:46.333622 - [SUCCESS] Tesseract: dite
+2025-05-12 12:10:46.923162 - [SUCCESS] EasyOCR: ५ +6
+2025-05-12 12:18:12.366045 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:18:12.489665 - [SUCCESS] Tesseract: Le ~
+~
+2025-05-12 12:18:13.147349 - [SUCCESS] EasyOCR: Whar is 4+5=?
+2025-05-12 12:45:59.332459 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 12:45:59.486603 - [SUCCESS] Tesseract: —
+2025-05-12 12:46:00.189256 - [SUCCESS] EasyOCR: २० + ३= 9
+2025-05-12 12:46:39.137453 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 12:46:39.261771 - [SUCCESS] Tesseract: ptt
+—
+2025-05-12 12:46:39.868635 - [SUCCESS] EasyOCR: २० + ३= 9
+2025-05-12 12:47:03.967661 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 12:47:07.136843 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 12:47:14.001159 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 12:47:23.198515 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 12:47:23.352130 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 12:47:29.667101 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 12:47:48.995094 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:47:49.163029 - [SUCCESS] Tesseract: | What is
+हे. V+5 =?
+2025-05-12 12:47:49.804424 - [SUCCESS] EasyOCR: Whar `s 4+5=?
+2025-05-12 12:49:35.091664 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:49:35.245868 - [SUCCESS] Tesseract: | whet 1
+—_—,
+2025-05-12 12:49:35.865122 - [SUCCESS] EasyOCR: Whar is 4+5=?
+2025-05-12 12:49:56.908004 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:49:57.010839 - [SUCCESS] Tesseract: ~
+2025-05-12 12:49:57.639631 - [SUCCESS] EasyOCR: Nhar is 4+5=?
+2025-05-12 12:50:17.179923 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:50:17.342580 - [SUCCESS] Tesseract: what is
+>. I+5 =,
+2025-05-12 12:50:17.957292 - [SUCCESS] EasyOCR: Whar is 4+5=?
+2025-05-12 12:50:46.324282 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:50:47.099473 - [SUCCESS] EasyOCR: WhaT 15 ८+5=?
+2025-05-12 12:52:46.789969 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:52:46.911607 - [SUCCESS] Tesseract: id
+
+: P
+4
+Ae
+2025-05-12 12:52:47.556518 - [SUCCESS] EasyOCR: Whar 5s 4+5=?
+2025-05-12 12:59:09.135956 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 12:59:09.954947 - [SUCCESS] Tesseract: i /'
+2025-05-12 12:59:10.662929 - [SUCCESS] EasyOCR: Wha+ is 4+5=?
+2025-05-12 13:00:49.438631 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 13:00:49.562055 - [SUCCESS] Tesseract: | what
+F
+2025-05-12 13:00:50.253348 - [SUCCESS] EasyOCR: Whar is 4+5=?
+2025-05-12 13:05:15.926203 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 13:05:16.070574 - [SUCCESS] Tesseract: | rat Z
+vh
+¢
+2025-05-12 13:05:16.818554 - [SUCCESS] EasyOCR: Whar is 4+5-?
+2025-05-12 13:16:43.285869 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 13:16:43.456504 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 13:16:51.388959 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 13:34:50.660338 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 13:34:50.813435 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 13:34:58.076534 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 13:36:29.959394 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 13:36:30.073900 - [SUCCESS] Tesseract: =
+2025-05-12 13:36:30.742745 - [SUCCESS] EasyOCR: Whar 1s 4+5=?
+2025-05-12 13:41:29.895123 - [SUCCESS] Gemini: 4 + 5 = ?
+2025-05-12 13:41:33.026652 - [SUCCESS] Tesseract: F = -
+2025-05-12 13:41:33.719575 - [SUCCESS] EasyOCR: Whar 15 4+5=?
+2025-05-12 13:42:40.859194 - [SUCCESS] Gemini: 5 + 6
+2025-05-12 13:42:41.612359 - [SUCCESS] EasyOCR: 5+6
+2025-05-12 13:43:07.484927 - [SUCCESS] Gemini: 2a + 3 = 9
+2025-05-12 13:43:07.658216 - [SUCCESS] Tesseract: 7 06+3< 2 |
+2025-05-12 13:43:15.317102 - [SUCCESS] EasyOCR: - ` " 8 . ^ ६ =  + 3- 6 . 0 9
+2025-05-12 13:43:54.486663 - [SUCCESS] Gemini: 7/3 + 8/3 + 5/3
+2025-05-12 13:43:57.729944 - [SUCCESS] Tesseract: 486७ हर * 7
+के रस Fras fy कक 1
+a a oN.
+| Ne
+न a —
+2025-05-12 13:43:58.461943 - [SUCCESS] EasyOCR: 7|3+^%3 $/3
+2025-05-18 13:16:52.194066 - [SUCCESS] Gemini: 2 + 2 × 3
+2025-05-18 13:16:53.069734 - [SUCCESS] Tesseract: 2 +2x3
+2025-05-18 13:17:05.677525 - [SUCCESS] EasyOCR: २ + 2 x 3
+2025-05-23 05:36:30.322675 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 05:36:30.610643 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 05:36:35.383234 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:03:17.140337 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:03:17.348508 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:03:22.089243 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:03:28.294810 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:03:31.049810 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:03:35.344335 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:04:16.761000 - [SUCCESS] Gemini: 3 + 3
+2025-05-23 06:04:19.994899 - [SUCCESS] Gemini: 3 + 3
+2025-05-23 06:04:20.827910 - [SUCCESS] Tesseract: ’ ss
+é
+_ ~ sae,=
+Al a रु
+gel a
+ra
+am : A
+an ES
+ey a
+क्र आप j
+ra L.:
+a
+at हर a
+$ Be {
+ee
+a
+a : जज
+५३ ty *
+. RA
+a 4 Oe |
+y ann ReNE |.) =:
+: ae
+ः yt ee
+\ “ol ARB
+a 70:23 ee
+ge 4 7 ue 3 थे
+ie abet «.
+am Bee St.
+: ५ हा Bet. ig
+Ra Maen .
+eg
+ae
+ke
+sae
+2025-05-23 06:04:21.014174 - [SUCCESS] Tesseract: ’ ss
+é
+_ ~ sae,=
+Al a रु
+gel a
+ra
+am : A
+an ES
+ey a
+क्र आप j
+ra L.:
+a
+at हर a
+$ Be {
+ee
+a
+a : जज
+५३ ty *
+. RA
+a 4 Oe |
+y ann ReNE |.) =:
+: ae
+ः yt ee
+\ “ol ARB
+a 70:23 ee
+ge 4 7 ue 3 थे
+ie abet «.
+am Bee St.
+: ५ हा Bet. ig
+Ra Maen .
+eg
+ae
+ke
+sae
+2025-05-23 06:04:35.316714 - [SUCCESS] EasyOCR: <
+2025-05-23 06:04:35.438305 - [SUCCESS] EasyOCR: <
+2025-05-23 06:04:41.064063 - [SUCCESS] Gemini: 3 + 3
+2025-05-23 06:04:45.133561 - [SUCCESS] Tesseract: ’ ss
+é
+_ ~ sae,=
+Al a रु
+gel a
+ra
+am : A
+an ES
+ey a
+क्र आप j
+ra L.:
+a
+at हर a
+$ Be {
+ee
+a
+a : जज
+५३ ty *
+. RA
+a 4 Oe |
+y ann ReNE |.) =:
+: ae
+ः yt ee
+\ “ol ARB
+a 70:23 ee
+ge 4 7 ue 3 थे
+ie abet «.
+am Bee St.
+: ५ हा Bet. ig
+Ra Maen .
+eg
+ae
+ke
+sae
+2025-05-23 06:04:52.434118 - [SUCCESS] EasyOCR: <
+2025-05-23 06:10:29.106383 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:10:29.270215 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:10:32.861840 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:10:35.048066 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:10:37.820589 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:10:41.269823 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:11:07.536471 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:11:07.694339 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:11:11.168023 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:16:43.974593 - [SUCCESS] Gemini: x + 45 + 30 = 180
+2025-05-23 06:16:44.141048 - [SUCCESS] Tesseract: C कर्ज 2
+p हू
+2025-05-23 06:16:48.020745 - [SUCCESS] EasyOCR: INZL _ ७ 4C 3०
+2025-05-23 06:31:21.852858 - [SUCCESS] Gemini: 3 + 3
+2025-05-23 06:31:24.626287 - [SUCCESS] Tesseract: Oe
+pe
+gue:
+7
+1
+I
+44
+I
+| 4
+|
+|| | ,
+| i! 4
+t . मर
+; ; a ; om fl
+‘ 4 ( हु . a : :
+w J है रा 5 {
+1 ' 4 ‘ .
+2 4 4 y { : t , :
+a vo . न
+& ea) ह ' . : ( + रा 7 |
+पका Ye kk a . हि ‘ { t I . 3 ‘ 1
+3 ie ५०४ Sy os wee ao . ५ . * ‘ a t {
+ang Be Vide BS: s . : \ 1 ' q ’ | 1. ii , डर
+at os a? us ia ta? ges ‘res H ar न पु . t | पु H "
+«Re STs | oe | i + 3 4 . ; ; { ‘| | j
+Pa SON ce Se TED er 1 ०० , , © ॥॒ ह : || । ‘
+७७ mG: Xe AST ABT Sam jecd es to 4 a es Se : nr 5 न ( : |
+a, shy ले, PAE S rab ety है ५. Dias you | feta , : . हि रु प्र t
+OR SEI कट NEGA Tans Lone rn ; हु \ . 1 t
+aye ) ०». a न oe. | age tt ५ 2 बे . . .
+पु yoo. an जन b sh sd a Beet ea हक 1% = Pek Tee ee A - - -, ॥९ . eh, 5
+. : ना 2S ree है, ५. | 2 oN WAL TPS । 5 0 te . पु hae हि . 1800 5६ ee : 7
+ay 1 Kan yb (हर wm 3 N rt png wets ow ’ ! Et ae mos
+‘ Tet Pon . ones | aes we be Ne a | हि मे et Fees oe fw ¥ ia = of ane by us er ye A ny eS o “.
+' Tg 78 ४४ 19.0 हूं Ue 0 xy Ee S eae ae हक ८2 कप ae i hh १९० 7 ऑल 5 rm | Oar
+5 an os, . ay a Pou! GaSe 2३: Vt OF: DS “ ay oy के eee रे . ” we ws
+. oe . .. tea हे अब 5 eee I 15 “AS ८ 65 t vf. हि oe Ps ५१ , we थे eed Sey
+of rat AEE | nore TES RS [EM ee BO ak कर | है
+- . ren Ut on, (2:६८ poms cyte ८४5 . a, : हक
+मर ‘ tN २३५०७ . हा
+2025-05-23 06:31:37.624613 - [SUCCESS] EasyOCR: #

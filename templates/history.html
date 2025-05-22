@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MathGuru AI - Your History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #eef2f7;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    .history-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .history-entry {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border-left: 5px solid #0d6efd;
+      word-wrap: break-word;
+    }
+
+    .timestamp {
+      font-size: 0.9em;
+      color: gray;
+    }
+
+    @media (max-width: 768px) {
+      .history-container {
+        padding: 20px 15px;
+        margin: 15px;
+      }
+
+      .history-entry {
+        font-size: 0.95rem;
+        padding: 16px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      form {
+        display: block !important;
+        margin-top: 10px;
+      }
+
+      .btn-danger.ms-2 {
+        margin-left: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container history-container">
+  <h2 class="text-center mb-4">📚 MathGuru AI - Your Solved Problems History</h2>
+
+  {% if logs %}
+    {% for item in logs %}
+      <div class="history-entry">
+        <h5><b>🧮 Expression:</b> {{ item.expression }}</h5>
+        <p><b>✅ Result:</b> {{ item.result }}</p>
+        <p><b>💡 Hint:</b> {{ item.hint }}</p>
+        <p class="timestamp">🕒 {{ item.timestamp }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-center text-muted">No history available yet. Solve some problems first! 🧠</p>
+  {% endif %}
+
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-primary">🔙 Back to Home</a>
+    <form action="/clear_history" method="POST" class="d-inline-block">
+      <button type="submit" class="btn btn-danger ms-2" onclick="return confirm('Are you sure you want to delete all history?');">
+        🗑️ Clear History
+      </button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
