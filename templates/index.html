@@ -117,10 +117,11 @@
 
   <div id="audioControls" style="display:none;">
     <h4>🔊 Hint Audio:</h4>
-    <button onclick="playAudio(hintAudioEn)" class="btn">▶️ English</button>
-    <button onclick="playAudio(hintAudioHi)" class="btn">🗣️ Hindi</button>
+    <button onclick="playHintAudio('en')" class="btn">▶️ English</button>
+    <button onclick="playHintAudio('hi')" class="btn">🗣️ Hindi</button>
     <button onclick="stopAudio()" class="btn secondary">⏹️ Stop</button>
   </div>
+  
 
   <h3>✅ Final Answer:</h3>
   <p><b>Answer:</b> <span id="result">--</span></p>
@@ -131,143 +132,145 @@
 
   <div id="finalAudioControls" style="display:none;">
     <h4>🔊 Final Explanation Audio:</h4>
-    <button onclick="playAudio(finalAudioEn)" class="btn">▶️ English</button>
-    <button onclick="playAudio(finalAudioHi)" class="btn">🗣️ Hindi</button>
+    <button onclick="playFinalAudio('en')" class="btn">▶️ English</button>
+    <button onclick="playFinalAudio('hi')" class="btn">🗣️ Hindi</button>
     <button onclick="stopAudio()" class="btn secondary">⏹️ Stop</button>
   </div>
 </div>
 
 <script>
-let hintHistory = [], currentHintIndex = -1;
-let hintAudioEn = '', hintAudioHi = '';
-let finalAudioEn = '', finalAudioHi = '';
-let currentAudio = null;
-
-function toggleTheme() {
-  document.body.classList.toggle("dark-theme");
-  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
-}
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-theme");
-}
-
-function toggleMenu() {
-  document.getElementById('navMenu').classList.toggle('show');
-}
-
-function playAudio(src) {
-  stopAudio();
-  currentAudio = new Audio(src);
-  currentAudio.play();
-}
-function stopAudio() {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
+  let hintHistory = [], currentHintIndex = -1;
+  let hintAudioEn = '', hintAudioHi = '';
+  let finalAudioEn = '', finalAudioHi = '';
+  let currentAudio = null;
+  
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
   }
-}
-
-function updateHintDisplay() {
-  document.getElementById('hintText').innerText = hintHistory[currentHintIndex];
-  document.getElementById('prevHintBtn').style.display = currentHintIndex > 0 ? "inline-block" : "none";
-  document.getElementById('audioControls').style.display = "block";
-  // Do not append hints to explanation anymore
-}
-
-document.getElementById('prevHintBtn').addEventListener("click", () => {
-  if (currentHintIndex > 0) {
-    currentHintIndex--;
-    updateHintDisplay();
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-theme");
   }
-});
-
-async function getNextHint() {
-  const response = await fetch('/next_hint', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: document.getElementById('text').innerText })
-  });
-  const data = await response.json();
-  if (data.hint) {
-    hintHistory.push(data.hint);
-    currentHintIndex++;
-    updateHintDisplay();
-
-    hintAudioEn = '/' + data.audio_en;
-    hintAudioHi = '/' + data.audio_hi;
+  
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('show');
   }
-}
-
-async function getFinalAnswer() {
-  const response = await fetch('/final_answer', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: document.getElementById('text').innerText })
-  });
-  const data = await response.json();
-  alert("✅ Final answer and explanation generated successfully!");
-
-  document.getElementById('result').innerText = data.answer || '--';
-
-  // 🧠 Clear previous explanation and only show final explanation
-  document.getElementById('steps').innerText = `🧠 Final Explanation:\n${data.explanation || '--'}`;
-
-  finalAudioEn = '/' + data.audio_en;
-  finalAudioHi = '/' + data.audio_hi;
-  document.getElementById("finalAudioControls").style.display = "block";
-}
-
-document.getElementById("uploadForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const file = document.getElementById("uploadFile").files[0];
-  const img = document.getElementById("previewImage");
-  img.src = URL.createObjectURL(file);
-  img.style.display = "block";
-
-  const formData = new FormData();
-  formData.append("file", file);
-
-  fetch("/scan_image", {
-    method: "POST",
-    body: formData
-  }).then(res => res.json())
-    .then(data => {
-      alert("✅ Image scanned successfully!");
-      document.getElementById("text").innerText = data.extracted || "---";
-      document.getElementById("result").innerText = "--";
-      document.getElementById("steps").innerText = "";
-      hintHistory = [data.hint];
-      currentHintIndex = 0;
+  
+  function playHintAudio(lang) {
+    stopAudio();
+    currentAudio = new Audio(lang === 'en' ? hintAudioEn : hintAudioHi);
+    currentAudio.play();
+  }
+  function playFinalAudio(lang) {
+    stopAudio();
+    currentAudio = new Audio(lang === 'en' ? finalAudioEn : finalAudioHi);
+    currentAudio.play();
+  }
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      currentAudio = null;
+    }
+  }
+  
+  function updateHintDisplay() {
+    document.getElementById('hintText').innerText = hintHistory[currentHintIndex];
+    document.getElementById('prevHintBtn').style.display = currentHintIndex > 0 ? "inline-block" : "none";
+    document.getElementById('audioControls').style.display = "block";
+  }
+  
+  document.getElementById('prevHintBtn').addEventListener("click", () => {
+    if (currentHintIndex > 0) {
+      currentHintIndex--;
       updateHintDisplay();
-
+    }
+  });
+  
+  async function getNextHint() {
+    const response = await fetch('/next_hint', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: document.getElementById('text').innerText })
+    });
+    const data = await response.json();
+    if (data.hint) {
+      hintHistory.push(data.hint);
+      currentHintIndex++;
+      updateHintDisplay();
+  
       hintAudioEn = '/' + data.audio_en;
       hintAudioHi = '/' + data.audio_hi;
+    }
+  }
+  
+  async function getFinalAnswer() {
+    const response = await fetch('/final_answer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: document.getElementById('text').innerText })
     });
-});
-
-document.getElementById("manualForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const expression = document.getElementById("manualInput").value.trim();
-  fetch("/manual", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ expression })
-  }).then(res => res.json())
-    .then(data => {
-      alert("✅ Problem submitted successfully!");
-      document.getElementById("text").innerText = data.extracted || expression;
-      document.getElementById("result").innerText = "--";
-      document.getElementById("steps").innerText = "";
-      hintHistory = [data.hint];
-      currentHintIndex = 0;
-      updateHintDisplay();
-
-      hintAudioEn = '/' + data.audio_en;
-      hintAudioHi = '/' + data.audio_hi;
-    });
-});
-</script>
-
-</body>
-</html>
+    const data = await response.json();
+    alert("✅ Final answer and explanation generated successfully!");
+  
+    document.getElementById('result').innerText = data.answer || '--';
+    document.getElementById('steps').innerText = `🧠 Final Explanation:\n${data.explanation || '--'}`;
+  
+    finalAudioEn = '/' + data.audio_en;
+    finalAudioHi = '/' + data.audio_hi;
+    document.getElementById("finalAudioControls").style.display = "block";
+  }
+  
+  document.getElementById("uploadForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const file = document.getElementById("uploadFile").files[0];
+    const img = document.getElementById("previewImage");
+    img.src = URL.createObjectURL(file);
+    img.style.display = "block";
+  
+    const formData = new FormData();
+    formData.append("file", file);
+  
+    fetch("/scan_image", {
+      method: "POST",
+      body: formData
+    }).then(res => res.json())
+      .then(data => {
+        alert("✅ Image scanned successfully!");
+        document.getElementById("text").innerText = data.extracted || "---";
+        document.getElementById("result").innerText = "--";
+        document.getElementById("steps").innerText = "";
+        hintHistory = [data.hint];
+        currentHintIndex = 0;
+        updateHintDisplay();
+  
+        hintAudioEn = '/' + data.audio_en;
+        hintAudioHi = '/' + data.audio_hi;
+      });
+  });
+  
+  document.getElementById("manualForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const expression = document.getElementById("manualInput").value.trim();
+    fetch("/manual", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ expression })
+    }).then(res => res.json())
+      .then(data => {
+        alert("✅ Problem submitted successfully!");
+        document.getElementById("text").innerText = data.extracted || expression;
+        document.getElementById("result").innerText = "--";
+        document.getElementById("steps").innerText = "";
+        hintHistory = [data.hint];
+        currentHintIndex = 0;
+        updateHintDisplay();
+  
+        hintAudioEn = '/' + data.audio_en;
+        hintAudioHi = '/' + data.audio_hi;
+      });
+  });
+  </script>
+  </body>
+  </html>
+  

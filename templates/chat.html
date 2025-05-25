@@ -2,167 +2,214 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🤖 MathGuru AI Chat Assistant</title>
+  <title>MathGuru AI Chat Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
     body {
-      background: #f8f9fa;
-      font-family: sans-serif;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
     }
-
     .chat-container {
       max-width: 800px;
-      margin: 20px auto;
-      background: white;
-      border-radius: 15px;
+      margin: 0 auto;
       padding: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-
     .message {
-      padding: 10px 15px;
-      margin-bottom: 12px;
-      border-radius: 20px;
-      word-wrap: break-word;
-      font-size: 16px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      border-radius: 12px;
+      max-width: 80%;
     }
-
     .user-message {
-      background: #d1e7dd;
+      background-color: #d1e7dd;
+      align-self: flex-end;
       text-align: right;
     }
-
     .bot-message {
-      background: #e2e3e5;
-      text-align: left;
+      background-color: #e2e3e5;
+      align-self: flex-start;
     }
-
     #chatBox {
-      max-height: 400px;
+      display: flex;
+      flex-direction: column-reverse;
+      max-height: 500px;
       overflow-y: auto;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: 1px solid #dee2e6;
+      margin-bottom: 20px;
+    }
+    .chat-input {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .input-wrapper {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      background: #fff;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+    }
+    .input-wrapper input[type="text"] {
+      border: none;
+      flex: 1;
+      font-size: 16px;
+      outline: none;
+    }
+    .input-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .input-icons button,
+    .input-icons label {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .send-btn {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .send-btn:hover {
+      background: #023e8a;
+    }
+    .preview {
+      max-width: 100%;
       border-radius: 10px;
-      background: #fefefe;
+      margin: 10px 0;
     }
-
-    .typing {
-      font-style: italic;
-      color: gray;
-    }
-
-    @media (max-width: 768px) {
-      .chat-container {
-        margin: 10px;
-        padding: 15px;
-      }
-
-      .input-group {
-        flex-direction: column;
-      }
-
-      .input-group input,
-      .input-group .send-btn {
-        width: 100% !important;
-        margin-bottom: 10px;
-      }
-
-      .form-check-inline {
-        display: block;
-        margin-bottom: 5px;
-      }
+    @media (max-width: 600px) {
+      .chat-container { padding: 10px; }
     }
   </style>
 </head>
 <body>
 
-<div class="container chat-container">
-  <h4 class="text-center mb-3">🤖 MathGuru AI Chat Assistant</h4>
-
+<div class="chat-container">
+  <h2>💬 Chat with MathGuru AI</h2>
   <div id="chatBox"></div>
 
-  <!-- Chat Input -->
-  <div class="input-group mb-2">
-    <input type="text" id="chatInput" class="form-control" placeholder="Type your math question or ask for a hint...">
-    <button class="btn btn-primary send-btn" onclick="sendMessage()">Send</button>
-  </div>
-
-  <!-- Language Toggle -->
-  <div class="d-flex justify-content-start mb-3 flex-wrap">
-    <div class="form-check form-check-inline me-3">
-      <input class="form-check-input" type="radio" name="langToggle" id="langEN" value="en" checked>
-      <label class="form-check-label" for="langEN">English</label>
+  <div class="chat-input">
+    <div class="input-wrapper">
+      <div class="input-icons">
+        <label for="fileInput">➕</label>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="sendFile()">
+        <button onclick="startVoice()">🎤</button>
+      </div>
+      <input type="text" id="userInput" placeholder="Ask a math question or say 'next hint'...">
     </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="langToggle" id="langHI" value="hi">
-      <label class="form-check-label" for="langHI">Hindi</label>
-    </div>
-  </div>
-
-  <!-- Back to Home Button -->
-  <div class="text-center">
-    <a href="/" class="btn btn-outline-secondary w-100">🔙 Back to Home</a>
+    <button class="send-btn" onclick="sendMessage()">Send</button>
   </div>
 </div>
 
-<!-- JavaScript Logic -->
 <script>
-  function appendMessage(sender, text, className) {
-    const chatBox = document.getElementById("chatBox");
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `message ${className}`;
-    messageDiv.innerHTML = `<div><strong>${sender}:</strong></div><div>${text}</div>`;
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
+let lastQuestion = "";
+const chatBox = document.getElementById("chatBox");
 
-  function sendMessage() {
-    const inputField = document.getElementById("chatInput");
-    const userText = inputField.value.trim();
-    if (!userText) return;
+function appendMessage(message, sender) {
+  const msg = document.createElement("div");
+  msg.className = "message " + (sender === "user" ? "user-message" : "bot-message");
+  msg.innerText = message;
+  chatBox.prepend(msg);
+}
 
-    const lang = document.querySelector('input[name="langToggle"]:checked').value;
+function appendImageWithMessage(imageUrl, messageText) {
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.flexDirection = "column";
+  container.style.alignItems = "flex-start";
 
-    appendMessage("You", userText, "user-message");
-    inputField.value = "";
+  const img = document.createElement("img");
+  img.src = imageUrl;
+  img.className = "preview";
 
-    const typingDiv = document.createElement("div");
-    typingDiv.className = "message bot-message typing";
-    typingDiv.id = "typing-indicator";
-    typingDiv.innerHTML = "<i>🤖 Typing...</i>";
-    document.getElementById("chatBox").appendChild(typingDiv);
+  const msg = document.createElement("div");
+  msg.className = "message bot-message";
+  msg.innerText = messageText;
 
-    fetch("/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userText, lang: lang })
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("typing-indicator").remove();
-      appendMessage("MathGuru", data.reply, "bot-message");
+  container.appendChild(img);
+  container.appendChild(msg);
+  chatBox.prepend(container);
+}
 
-      const audioSrc = lang === 'hi' ? data.audio_hi : data.audio_en;
-      if (audioSrc) {
-        const audio = new Audio(audioSrc);
-        audio.play();
-      }
-    })
-    .catch(error => {
-      document.getElementById("typing-indicator").remove();
-      appendMessage("MathGuru", "⚠️ Server error. Try again.", "bot-message");
-      console.error(error);
-    });
-  }
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+  if (!message) return;
 
-  document.getElementById("chatInput").addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
+  appendMessage(message, "user");
+  input.value = "";
+
+  let endpoint = "/chat";
+  let body = { message };
+
+  fetch(endpoint, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.extracted) lastQuestion = data.extracted;
+    appendMessage(data.reply || "⚠️ No reply", "bot");
   });
+}
+
+function sendFile() {
+  const file = document.getElementById("fileInput").files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const imageUrl = URL.createObjectURL(file);
+
+  fetch("/chat_image", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.extracted) lastQuestion = data.extracted;
+    appendImageWithMessage(imageUrl, data.reply || "⚠️ No reply from image");
+  });
+}
+
+function startVoice() {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Speech recognition not supported.");
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    const speech = event.results[0][0].transcript;
+    document.getElementById("userInput").value = speech;
+    sendMessage();
+  };
+
+  recognition.onerror = function(event) {
+    alert("Voice error: " + event.error);
+  };
+
+  recognition.start();
+}
 </script>
 
 </body>

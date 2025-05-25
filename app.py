@@ -97,7 +97,7 @@ def manual_input():
     try:
         data = request.get_json()
         expression = data.get('expression', '').strip()
-        
+
         # Save to session
         session["problem"] = expression
         session["step"] = 1
@@ -106,16 +106,23 @@ def manual_input():
         # Get first hint
         hint = get_next_hint(expression)
 
-        # Save history (manual input)
+        # 🔊 Generate hint audio
+        audio_en = synthesize_english_audio(hint)
+        audio_hi = synthesize_hindi_audio(hint)
+
+        # Save history
         save_history(expression, "", hint)
 
         return jsonify({
             'extracted': expression,
-            'hint': hint
+            'hint': hint,
+            'audio_en': audio_en,
+            'audio_hi': audio_hi
         })
     except Exception as e:
         print(f"[MANUAL ERROR]: {e}")
         return jsonify({'error': 'Manual input failed.'}), 500
+
 
 
 
@@ -219,11 +226,22 @@ def next_hint():
     try:
         data = request.get_json()
         prompt = data.get("prompt", "").strip()
+
         hint = get_next_hint(prompt)
-        return jsonify({ "hint": hint })
+
+        # 🔊 Generate hint audio
+        audio_en = synthesize_english_audio(hint)
+        audio_hi = synthesize_hindi_audio(hint)
+
+        return jsonify({
+            "hint": hint,
+            "audio_en": audio_en,
+            "audio_hi": audio_hi
+        })
     except Exception as e:
         print(f"[NEXT HINT ERROR]: {e}")
         return jsonify({ "hint": "❌ Error generating hint." })
+
 
 
 
@@ -264,73 +282,74 @@ def final_answer():
 
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
-    if 'user' not in session:
-        return redirect('/login')
+    if request.method == 'GET':
+        if 'user' not in session:
+            return redirect('/login')
+        return render_template("chat.html")
 
     if request.method == 'POST':
-        from utils.tts import synthesize_english_audio, synthesize_hindi_audio
-        import re
-        import google.generativeai as genai
-
-        data = request.get_json()
-        user_input = data.get("message", "").strip().lower()
-        lang = data.get("lang", "en")
-
-        if not user_input:
-            return jsonify({"reply": "❗Please enter a question.", "audio_en": "", "audio_hi": ""})
-
-        print("[DEBUG] User said:", user_input)
-
-        # ✅ Case 1: App-related help
-        app_keywords = ["app", "not working", "error", "bug", "problem in app"]
-        if any(word in user_input for word in app_keywords):
-            reply = "🛠️ If you're facing problems with the app, try restarting it or checking your internet connection. If issues persist, contact your teacher or technical support."
-            audio_en = synthesize_english_audio(reply)
-            audio_hi = synthesize_hindi_audio(reply)
-            return jsonify({"reply": reply, "audio_en": audio_en, "audio_hi": audio_hi})
-
-        # ✅ Case 2: Math confusion help
-        math_keywords = ["i don't understand", "help me solve", "confused", "stuck", "math help"]
-        if any(word in user_input for word in math_keywords):
-            reply = "💡 Try breaking the math problem into smaller steps. Start with known formulas or use examples. You can also ask me to solve it step by step!"
-            audio_en = synthesize_english_audio(reply)
-            audio_hi = synthesize_hindi_audio(reply)
-            return jsonify({"reply": reply, "audio_en": audio_en, "audio_hi": audio_hi})
-
-        # ✅ Case 3: Small talk support
-        if "can you help" in user_input or "who are you" in user_input:
-            reply = "🤖 I'm MathGuru AI, your personal math tutor. I can explain concepts, solve problems, and help you learn better!"
-            audio_en = synthesize_english_audio(reply)
-            audio_hi = synthesize_hindi_audio(reply)
-            return jsonify({"reply": reply, "audio_en": audio_en, "audio_hi": audio_hi})
-
-        # ✅ Case 4: Simple math eval
         try:
-            if re.fullmatch(r"[0-9+\-*/(). ]+", user_input):
-                answer = str(eval(user_input))
-                reply = f"The answer is {answer}"
-                audio_en = synthesize_english_audio(reply)
-                audio_hi = synthesize_hindi_audio(reply)
-                return jsonify({"reply": reply, "audio_en": audio_en, "audio_hi": audio_hi})
+            data = request.get_json()
+            message = data.get("message", "").strip()
+
+            if not message:
+                return jsonify({"reply": "❗Please enter a valid question."})
+
+            # ✅ Match any phrase that includes 'next hint'
+            if "next hint" in message.lower():
+                last_question = session.get("last_question", "")
+                if not last_question:
+                    return jsonify({"reply": "❌ No previous question found. Please enter a math problem first."})
+                hint = get_next_hint(last_question)
+                return jsonify({"reply": hint})
+
+            # New question: store and respond
+            session["last_question"] = message
+            hint = get_next_hint(message)
+            return jsonify({
+                "reply": hint,
+                "extracted": message
+            })
+
         except Exception as e:
-            print("[EVAL ERROR]:", e)
+            print("[Chat Error]:", e)
+            return jsonify({"reply": "⚠️ Could not process your message."})
 
-        # ✅ Case 5: Use Gemini for complex questions
-        try:
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            response = model.generate_content(user_input)
-            reply = response.text.strip()
-            print("[DEBUG] Gemini says:", reply)
-        except Exception as e:
-            print("[GEMINI ERROR]:", e)
-            reply = "🤖 Sorry, I couldn’t connect to the AI server."
 
-        audio_en = synthesize_english_audio(reply)
-        audio_hi = synthesize_hindi_audio(reply)
 
-        return jsonify({"reply": reply, "audio_en": audio_en, "audio_hi": audio_hi})
 
-    return render_template("chat.html")
+@app.route('/chat_image', methods=['POST'])
+def chat_image():
+    if 'user' not in session:
+        return jsonify({'reply': '❌ Not logged in'})
+
+    file = request.files.get('image')
+    if not file:
+        return jsonify({'reply': '❌ No image received'})
+
+    try:
+        filename = secure_filename(file.filename)
+        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(path)
+
+        extracted = extract_text(path)
+        if not extracted:
+            return jsonify({'reply': '❌ Could not read anything from image.'})
+
+        hint = get_next_hint(extracted)
+        
+        session["last_question"] = extracted  # ✅ ✅ ✅ Store it for 'next hint'
+
+        return jsonify({
+            'reply': f"🧠 Extracted: {extracted}\n💡 Hint: {hint}",
+            'extracted': extracted
+        })
+
+    except Exception as e:
+        print(f"[CHAT IMAGE ERROR]: {e}")
+        return jsonify({'reply': '⚠️ Error processing image'})
+
+
 
 
 
