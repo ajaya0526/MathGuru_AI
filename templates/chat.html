@@ -7,32 +7,90 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
     body {
-      background-color: #f0f0f0;
+      background-color: var(--bg-color, #f0f0f0);
       font-family: Arial, sans-serif;
+      transition: background-color 0.3s;
     }
+
+    .dark-mode {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --card-color: #1e1e1e;
+    }
+
+    nav {
+      background-color: #0077b6;
+      padding: 12px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      background-color: white;
+      color: #0077b6;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .nav-btn:hover {
+      background-color: #90e0ef;
+    }
+
     .chat-container {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 20px;
-      background: white;
+      background: var(--card-color, white);
+      color: var(--text-color, black);
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
+
     .message {
       padding: 12px 16px;
       margin: 10px 0;
       border-radius: 12px;
       max-width: 80%;
+      word-wrap: break-word;
     }
+
     .user-message {
       background-color: #d1e7dd;
       align-self: flex-end;
       text-align: right;
     }
+
     .bot-message {
       background-color: #e2e3e5;
       align-self: flex-start;
     }
+
+    .dark-mode .user-message {
+      background-color: #2e7d32;
+      color: white;
+    }
+
+    .dark-mode .bot-message {
+      background-color: #424242;
+      color: white;
+    }
+
     #chatBox {
       display: flex;
       flex-direction: column-reverse;
@@ -40,12 +98,14 @@
       overflow-y: auto;
       margin-bottom: 20px;
     }
+
     .chat-input {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
     }
+
     .input-wrapper {
       display: flex;
       flex: 1;
@@ -55,17 +115,20 @@
       border: 1px solid #ccc;
       padding: 8px 12px;
     }
+
     .input-wrapper input[type="text"] {
       border: none;
       flex: 1;
       font-size: 16px;
       outline: none;
     }
+
     .input-icons {
       display: flex;
       align-items: center;
       gap: 8px;
     }
+
     .input-icons button,
     .input-icons label {
       background: none;
@@ -73,6 +136,7 @@
       cursor: pointer;
       font-size: 18px;
     }
+
     .send-btn {
       background: #0077b6;
       color: white;
@@ -82,21 +146,68 @@
       font-size: 16px;
       cursor: pointer;
     }
+
     .send-btn:hover {
       background: #023e8a;
     }
+
     .preview {
       max-width: 100%;
       border-radius: 10px;
       margin: 10px 0;
     }
+
+    .home-bottom {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .home-bottom button {
+      background-color: #00b4d8;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .home-bottom button:hover {
+      background-color: #0077b6;
+    }
+
     @media (max-width: 600px) {
-      .chat-container { padding: 10px; }
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-right {
+        margin-top: 10px;
+      }
+
+      .chat-container {
+        padding: 10px;
+      }
+
+      .send-btn {
+        flex: 1;
+      }
     }
   </style>
 </head>
 <body>
 
+<!-- 🔝 Top Navigation -->
+<nav>
+  <div class="nav-left">📊 MathGuru AI Chat</div>
+  <div class="nav-right">
+    <button class="nav-btn" onclick="window.location.href='/'">🏠 Home</button>
+    <button class="nav-btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
+  </div>
+</nav>
+
+<!-- 💬 Chat UI -->
 <div class="chat-container">
   <h2>💬 Chat with MathGuru AI</h2>
   <div id="chatBox"></div>
@@ -108,12 +219,20 @@
         <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="sendFile()">
         <button onclick="startVoice()">🎤</button>
       </div>
-      <input type="text" id="userInput" placeholder="Ask a math question or say 'next hint'...">
+      <input type="text" id="userInput" placeholder="Ask a math question or type 'next hint'...">
     </div>
+  </div>
+  <div>
     <button class="send-btn" onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- 🔙 Return Home Button -->
+  <div class="home-bottom">
+    <button onclick="window.location.href='/'">🏠 Return to Home Page</button>
   </div>
 </div>
 
+<!-- 💬 Scripts -->
 <script>
 let lastQuestion = "";
 const chatBox = document.getElementById("chatBox");
@@ -152,8 +271,8 @@ function sendMessage() {
   appendMessage(message, "user");
   input.value = "";
 
-  let endpoint = "/chat";
-  let body = { message };
+  const endpoint = "/chat";
+  const body = { message };
 
   fetch(endpoint, {
     method: "POST",
@@ -163,7 +282,13 @@ function sendMessage() {
   .then(res => res.json())
   .then(data => {
     if (data.extracted) lastQuestion = data.extracted;
+    else if (!lastQuestion) lastQuestion = message;
+
     appendMessage(data.reply || "⚠️ No reply", "bot");
+
+    if (data.reply && data.reply.toLowerCase().includes("hint")) {
+      appendMessage("👉 Please type **next hint** to get the next step.", "bot");
+    }
   });
 }
 
@@ -209,6 +334,10 @@ function startVoice() {
   };
 
   recognition.start();
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
 }
 </script>
 

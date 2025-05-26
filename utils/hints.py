@@ -39,7 +39,7 @@ def reset_conversation():
     conversation["grade"] = "5"
     conversation["history"] = []
 
-# 🎯 Intelligent offline fallback hints
+# 🎯 Offline fallback hints
 def offline_hint(question, step):
     q = question.lower()
     if "add" in q or "+" in q:
@@ -87,7 +87,7 @@ Format:
     conversation["history"].append(text)
     return text
 
-# ✅ Full step-by-step solution
+# ✅ Final step-by-step solution
 def get_final_solution(question):
     if is_internet_available():
         try:
@@ -125,7 +125,7 @@ def extract_final_answer(text):
     match = re.search(r'(final answer|answer)\s*[:=]?\s*(.+)', text, re.IGNORECASE)
     return match.group(2).strip() if match else "--"
 
-# 🔊 Generate offline English TTS for hint
+# 🔊 Generate English audio using gTTS
 def speak_hint_english(text):
     try:
         tts = gTTS(text=text, lang='en')
@@ -136,7 +136,7 @@ def speak_hint_english(text):
         print(f"[ENGLISH TTS ERROR]: {e}")
         return ""
 
-# 🔊 Generate offline Hindi TTS using pyttsx3
+# 🔊 Generate Hindi audio using pyttsx3
 def speak_hint_hindi(text):
     try:
         engine = pyttsx3.init()

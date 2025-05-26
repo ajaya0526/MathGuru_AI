@@ -295,7 +295,7 @@ def chat():
             if not message:
                 return jsonify({"reply": "❗Please enter a valid question."})
 
-            # ✅ Match any phrase that includes 'next hint'
+            # 🧠 If user typed "next hint"
             if "next hint" in message.lower():
                 last_question = session.get("last_question", "")
                 if not last_question:
@@ -303,7 +303,7 @@ def chat():
                 hint = get_next_hint(last_question)
                 return jsonify({"reply": hint})
 
-            # New question: store and respond
+            # 💾 Save new question
             session["last_question"] = message
             hint = get_next_hint(message)
             return jsonify({
@@ -314,7 +314,6 @@ def chat():
         except Exception as e:
             print("[Chat Error]:", e)
             return jsonify({"reply": "⚠️ Could not process your message."})
-
 
 
 
@@ -438,6 +437,10 @@ def hint_audio():
             "audio_hi": "",
             "error": "❌ Failed to generate hint audio."
         })
+    
+    
+    
+
 
 
 if __name__ == '__main__':

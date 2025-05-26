@@ -7,7 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <style>
-    body.dark-theme { background-color: #121212; color: #f0f0f0; }
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-theme {
+  background-image: none !important;
+}
+
+
     .navbar {
       background-color: #0077b6;
       color: white;
@@ -17,15 +36,20 @@
       padding: 12px 20px;
       flex-wrap: wrap;
     }
+
     .nav-brand { font-size: 24px; font-weight: bold; }
+
     .nav-links {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
     }
+
     .nav-links li { display: inline; }
+
     .nav-links a, .theme-btn {
       text-decoration: none;
       color: white;
@@ -36,10 +60,12 @@
       border: none;
       cursor: pointer;
     }
+
     .nav-links a:hover, .theme-btn:hover {
       background-color: #90e0ef;
       color: black;
     }
+
     .hamburger {
       display: none;
       font-size: 26px;
@@ -48,12 +74,9 @@
       color: white;
       cursor: pointer;
     }
-    @media (max-width: 768px) {
-      .nav-links { flex-direction: column; width: 100%; display: none; margin-top: 10px; }
-      .nav-links.show { display: flex; }
-      .hamburger { display: block; }
-    }
+
     .container { text-align: center; padding: 20px; }
+
     video, canvas, img, input[type="file"] {
       width: 100%;
       max-width: 400px;
@@ -61,34 +84,64 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     pre {
       background-color: #f1f1f1;
       padding: 10px;
       border-radius: 8px;
       overflow-x: auto;
     }
+
     body.dark-theme pre {
       background-color: #1e1e1e;
       color: #e0e0e0;
     }
+
+    .btn {
+      background-color: #0077b6;
+      color: white;
+      padding: 10px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background-color: #adb5bd;
+    }
+
     #audioControls button, #finalAudioControls button { margin: 5px; }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        margin-top: 10px;
+      }
+      .nav-links.show { display: flex; }
+      .hamburger { display: block; }
+    }
+
   </style>
+   
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="nav-brand">📸 MathGuru AI</div>
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
-  <ul class="nav-links" id="navMenu">
-    <li><a href="/">🏠 Home</a></li>
-    <li><a href="/chat">💬 Chat with AI</a></li>
-    <li><a href="/hints">💡 Hints</a></li>
-    <li><a href="/history">📚 History</a></li>
-    <li><a href="/feedback">📝 Feedback</a></li>
-    <li><a href="/logout">🚪 Logout</a></li>
-    <li><button onclick="toggleTheme()" class="theme-btn">🌓 Theme</button></li>
-  </ul>
-</nav>
+  <nav class="navbar">
+    <div class="nav-brand">📸 MathGuru AI</div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="/">🏠 Home</a></li>
+      <li><a href="/chat">💬 Chat with AI</a></li>
+      <li><a href="/hints">💡 Hints</a></li>
+      <li><a href="/history">📚 History</a></li>
+      <li><a href="/feedback">📝 Feedback</a></li>
+      <li><a href="/logout">🚪 Logout</a></li>
+      <li><button onclick="toggleTheme()" class="theme-btn">🌓 Theme</button></li>
+    </ul>
+  </nav>
 
 <div class="container">
   <h2>📷 Solve Math Problems with AI</h2>
@@ -151,7 +204,7 @@
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-theme");
   }
-  
+
   function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('show');
   }
