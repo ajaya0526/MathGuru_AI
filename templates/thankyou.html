@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You | MathGuru AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-light: #f1f1f1;
+      --bg-dark: #1e1e1e;
+      --text-light: #000;
+      --text-dark: #f0f0f0;
+      --card-light: #fff;
+      --card-dark: #2e2e2e;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-theme {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .card {
+      background: var(--card-light);
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-theme .card {
+      background: var(--card-dark);
+      box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+    }
+
+    h1 {
+      color: #0077b6;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #023e8a;
+    }
+
+    .btn.secondary {
+      background-color: #adb5bd;
+      color: black;
+      margin-left: 10px;
+    }
+
+    body.dark-theme .btn.secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .btn.secondary {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🙏 Thank You, {{ name }}!</h1>
+    <p>Your feedback has been received. We appreciate your input to make MathGuru AI better.</p>
+
+    <button class="btn" onclick="window.location.href='/'">🔙 Go to Home</button>
+    <button class="btn secondary" onclick="toggleTheme()">🌓 Toggle Theme</button>
+  </div>
+
+  <script>
+    // 🌙 Dark Mode Toggle Script
+    function toggleTheme() {
+      document.body.classList.toggle("dark-theme");
+      localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+    }
+
+    // 🌓 Apply saved theme on load
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-theme");
+    }
+  </script>
+
+</body>
+</html>

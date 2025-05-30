@@ -1,104 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Feedback | MathGuru AI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <title>Feedback | MathGuru AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-light: #f8f9fa;
+      --bg-dark: #121212;
+      --text-light: #000;
+      --text-dark: #f0f0f0;
+      --card-light: #ffffff;
+      --card-dark: #1e1e1e;
+      --primary: #0077b6;
+      --secondary: #adb5bd;
+    }
 
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-            background-color: #f8f9fa;
-            margin: 0;
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      margin: 0;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        h1 {
-            text-align: center;
-            color: #0077b6;
-        }
+    body.dark-theme {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
 
-        form {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-        }
+    h1 {
+      text-align: center;
+      color: var(--primary);
+    }
 
-        label {
-            font-weight: bold;
-        }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: var(--card-light);
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        input[type="text"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
+    body.dark-theme .container {
+      background: var(--card-dark);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+    }
 
-        .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px 5px 0 0;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background-color: #0077b6;
-            color: white;
-        }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
 
-        .btn.secondary {
-            background-color: #adb5bd;
-            color: black;
-        }
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin-bottom: 15px;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
+    body.dark-theme input,
+    body.dark-theme textarea,
+    body.dark-theme select {
+      background-color: #1f1f1f;
+      color: #f0f0f0;
+      border: 1px solid #555;
+    }
 
-            .btn, .btn.secondary {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
+    .btn {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 10px 5px 0 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: var(--primary);
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #005f87;
+    }
+
+    .btn.secondary {
+      background-color: var(--secondary);
+      color: black;
+    }
+
+    body.dark-theme .btn.secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      .btn, .btn.secondary {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <h1>💬 Your Feedback</h1>
+  <h1>💬 Your Feedback</h1>
 
+  <div class="container">
     <form action="/submit-feedback" method="POST" onsubmit="return confirm('✅ Submit your feedback?')">
-        <!-- Name -->
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Anonymous">
+      <!-- Name -->
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" placeholder="Anonymous">
 
-        <!-- Message -->
-        <label for="message">What did you like?</label>
-        <textarea name="message" id="message" rows="5" placeholder="Your thoughts..."></textarea>
+      <!-- Message -->
+      <label for="message">What did you like?</label>
+      <textarea name="message" id="message" rows="5" placeholder="Your thoughts..."></textarea>
 
-        <!-- Rating -->
-        <label for="rating">Rate Us:</label>
-        <select name="rating" id="rating">
-            <option value="5">⭐⭐⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="1">⭐</option>
-        </select>
+      <!-- Rating -->
+      <label for="rating">Rate Us:</label>
+      <select name="rating" id="rating">
+        <option value="5">⭐⭐⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="1">⭐</option>
+      </select>
 
-        <!-- Buttons -->
+      <!-- Buttons -->
+      <div class="actions">
         <button type="submit" class="btn">✅ Submit</button>
         <button type="button" onclick="window.location.href='/'" class="btn secondary">🔙 Back</button>
+        <button type="button" onclick="toggleTheme()" class="btn secondary">🌓 Toggle Theme</button>
+      </div>
     </form>
+  </div>
+
+  <script>
+    // 🌙 Toggle dark mode and persist in localStorage
+    function toggleTheme() {
+      document.body.classList.toggle("dark-theme");
+      localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+    }
+
+    // 🌓 Apply saved theme on load
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-theme");
+    }
+  </script>
 </body>
 </html>

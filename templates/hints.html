@@ -12,8 +12,9 @@
       font-family: 'Comic Neue', cursive;
       margin: 0;
       padding: 0;
+      transition: background 0.3s, color 0.3s;
     }
-
+  
     .btn {
       background-color: #ffb703;
       border: none;
@@ -22,16 +23,17 @@
       border-radius: 12px;
       font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
-
+  
     .btn:hover {
       background-color: #fca311;
     }
-
+  
     .btn.secondary {
       background-color: #8ecae6;
     }
-
+  
     .container {
       max-width: 800px;
       margin: auto;
@@ -39,8 +41,9 @@
       background: white;
       border-radius: 16px;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, color 0.3s;
     }
-
+  
     nav {
       background-color: #0077b6;
       padding: 15px;
@@ -48,43 +51,89 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      transition: background-color 0.3s;
     }
-
+  
     nav div {
       color: white;
       font-size: 20px;
       font-weight: bold;
     }
-
+  
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
         align-items: flex-start;
       }
-
+  
       .container {
         padding: 20px 15px;
         margin: 10px;
       }
-
+  
       h2 {
         font-size: 1.5rem;
       }
-
+  
       input, select, .btn, audio {
         width: 100% !important;
         margin: 6px 0 !important;
       }
-
+  
       .btn.secondary {
         margin-left: 0 !important;
       }
-
+  
       .text-center.mt-4 .btn {
         margin-bottom: 10px;
       }
     }
+  
+    /* 🌙 Dark Theme Support */
+    body.dark-theme {
+      background: linear-gradient(to right, #2b2b2b, #1e1e1e);
+      color: #f0f0f0;
+    }
+  
+    body.dark-theme .container {
+      background-color: #2e2e2e;
+      color: #e0e0e0;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+    }
+  
+    body.dark-theme nav {
+      background-color: #1f2a48;
+    }
+  
+    body.dark-theme .btn {
+      background-color: #00b4d8;
+      color: black;
+    }
+  
+    body.dark-theme .btn.secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+  
+    body.dark-theme input,
+    body.dark-theme select {
+      background-color: #1e1e1e;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+  
+    body.dark-theme .alert {
+      background-color: #333;
+      border-color: #444;
+      color: #f8f9fa;
+    }
+  
+    body.dark-theme #hint-box {
+      background-color: #3a3a3a;
+      color: #f8f8f8;
+    }
   </style>
+  
 </head>
 
 <body>
@@ -196,6 +245,17 @@
       audio.pause();
       audio.currentTime = 0;
     }
+
+    // 🌙 Dark Mode Toggle System
+function toggleTheme() {
+  document.body.classList.toggle("dark-theme");
+  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+}
+
+// 🌓 Apply saved theme on load
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-theme");
+}
   </script>
 </body>
 </html>

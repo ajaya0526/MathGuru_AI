@@ -6,8 +6,10 @@ import pyttsx3
 from gtts import gTTS
 import google.generativeai as genai
 from dotenv import load_dotenv
+import json
+import difflib
 
-# 🔐 Load environment
+# 🔐 Load environment and Gemini API
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
@@ -19,13 +21,50 @@ def is_internet_available():
     except:
         return False
 
-# 🤖 Gemini model
+# 🤖 Initialize Gemini Model
 try:
     model = genai.GenerativeModel("gemini-1.5-flash")
 except Exception as e:
     print("[Gemini model init failed]", e)
 
-# 📦 Session cache
+# 📦 Load offline templates
+try:
+    with open("utils/offline_hint_templates_50.json") as f:
+        predefined_templates = json.load(f)
+except Exception as e:
+    print("[TEMPLATE LOAD ERROR]:", e)
+    predefined_templates = {}
+
+# 📘 Pattern matching for template keys
+def match_template(question):
+    q = question.lower().strip()
+
+    # Normalize digits and variables for pattern matching
+    q = re.sub(r"\d+", "n", q)         # Replace all numbers with 'n'
+    q = re.sub(r"[a-z]", "x", q)       # Replace all letters with 'x'
+    q = re.sub(r"\s+", " ", q)         # Normalize spaces
+
+    if "lcm of n and n" in q:
+        return "lcm of a and b"
+    elif "area of triangle" in q:
+        return "what is the area of a triangle with base b and height h"
+    elif "simplify (x+x)(x+x)" in q:
+        return "simplify (x + a)(x + b)"
+    elif "n x + n = n" in q or "n x - n = n" in q:
+        return "solve the equation ax + b = c"
+    elif "how many apples" in q:
+        return "how many apples does sam have"
+    elif "percentage of n" in q or "what is the percentage of n" in q:
+        return "percentage of a number"
+    elif re.fullmatch(r"(n\s*\+\s*)+n", q):  # matches "n + n", "n + n + n"
+        return "add two numbers"
+    elif re.search(r"\+.*\*", q) or re.search(r"\*.*\+", q):  # "6 + 7 * 7"
+        return "mixed operation"
+    return None
+
+
+
+# 📦 Conversation State
 conversation = {
     "question": "",
     "grade": "5",
@@ -39,23 +78,30 @@ def reset_conversation():
     conversation["grade"] = "5"
     conversation["history"] = []
 
-# 🎯 Offline fallback hints
+# 🎯 Offline Fallback Hint System
 def offline_hint(question, step):
-    q = question.lower()
-    if "add" in q or "+" in q:
+    key = match_template(question) or question.lower().strip()
+    if key in predefined_templates:
+        hints = predefined_templates[key]
+        if step <= len(hints):
+            return f"💡 Hint {step}: {hints[step - 1]}"
+        else:
+            return f"✅ You’ve received all hints. Try solving now."
+    # Generic fallback
+    if "add" in key or "+" in key:
         return f"💡 Hint {step}: Try lining up the numbers and adding each column."
-    elif "subtract" in q or "-" in q:
+    elif "subtract" in key or "-" in key:
         return f"💡 Hint {step}: Start from the rightmost digit. Do you need to borrow?"
-    elif "multiply" in q or "*" in q or "times" in q:
+    elif "multiply" in key or "*" in key or "times" in key:
         return f"💡 Hint {step}: Break one number into parts. Try the distributive method."
-    elif "divide" in q or "/" in q:
+    elif "divide" in key or "/" in key:
         return f"💡 Hint {step}: Think of how many times the divisor fits into the dividend."
-    elif "^" in q or "square" in q or "power" in q:
+    elif "^" in key or "square" in key or "power" in key:
         return f"💡 Hint {step}: Multiply the base by itself for the number of times in the exponent."
     else:
         return f"💡 Hint {step}: Try identifying what operation is required first."
 
-# 💬 Generate next hint
+# 💬 Get Next Hint (online/offline)
 def get_next_hint(question):
     if conversation["question"] != question:
         reset_conversation()
@@ -87,7 +133,7 @@ Format:
     conversation["history"].append(text)
     return text
 
-# ✅ Final step-by-step solution
+# ✅ Final Solution (Gemini only)
 def get_final_solution(question):
     if is_internet_available():
         try:
@@ -125,7 +171,7 @@ def extract_final_answer(text):
     match = re.search(r'(final answer|answer)\s*[:=]?\s*(.+)', text, re.IGNORECASE)
     return match.group(2).strip() if match else "--"
 
-# 🔊 Generate English audio using gTTS
+# 🔊 English TTS using gTTS
 def speak_hint_english(text):
     try:
         tts = gTTS(text=text, lang='en')
@@ -136,7 +182,7 @@ def speak_hint_english(text):
         print(f"[ENGLISH TTS ERROR]: {e}")
         return ""
 
-# 🔊 Generate Hindi audio using pyttsx3
+# 🔊 Hindi TTS using pyttsx3
 def speak_hint_hindi(text):
     try:
         engine = pyttsx3.init()

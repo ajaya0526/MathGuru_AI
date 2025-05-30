@@ -78,17 +78,29 @@ def feedback():
         return redirect('/login')
     return render_template('feedback.html')
 
+# 🔐 Dummy function to save feedback (you can log or write to DB/file)
+def save_feedback(name, message, rating):
+    feedback_entry = f"{name} | {rating}⭐ | {message}\n"
+    with open("feedback_log.txt", "a", encoding="utf-8") as f:
+        f.write(feedback_entry)
+
+# 🚀 Feedback submission route
 @app.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
     try:
         name = request.form.get('name', 'Anonymous')
         message = request.form.get('message', '')
         rating = request.form.get('rating', '5')
+
+        # Save feedback (you can replace this with DB logic)
         save_feedback(name, message, rating)
-        return "<h2>✅ Thank you for your feedback!</h2><a href='/'>💙 Back to Home</a>"
+
+        # Render thank-you page with user's name
+        return render_template('thankyou.html', name=name)
+
     except Exception as e:
         print(f"[FEEDBACK ERROR]: {e}")
-        return "<h2>❌ Failed to save feedback</h2>", 500
+        return "<h2>❌ Failed to save feedback</h2><a href='/'>🔙 Back to Home</a>", 500
 
 @app.route('/manual', methods=['POST'])
 def manual_input():
@@ -195,6 +207,13 @@ def upload_camera_image():
         session["problem"] = extracted
         session["step"] = 1
         session["grade"] = "5"
+
+        # Use step from session
+        step = session["step"]
+        hint1 = get_khan_hint(extracted, step, "5")
+
+        # Save step for next hint
+        session["step"] += 1
 
         # ✅ Auto-generate Hint 1
         hint1 = get_khan_hint(extracted, 1, "5")
