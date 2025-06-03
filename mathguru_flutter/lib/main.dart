@@ -37,7 +37,7 @@ class _WebViewContainerState extends State<WebViewContainer> {
     String flaskUrl = Platform.isAndroid
         ? "http://10.0.2.2:5000"
         : "http://192.168.4.67:5000"; // Replace with your Mac's IP if needed
-
+        //: "http://10.51.16.44:5000" ;
     return Scaffold(
       appBar: AppBar(
         title: Text("MathGuru AI"),

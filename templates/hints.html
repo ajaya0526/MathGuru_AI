@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <title>💡 Guided Math Hint | MathGuru AI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/static/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to right, #fffde7, #e0f7fa);
-      font-family: 'Comic Neue', cursive;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       transition: background 0.3s, color 0.3s;
     }
-  
+
     .btn {
       background-color: #ffb703;
       border: none;
@@ -23,17 +23,18 @@
       border-radius: 12px;
       font-size: 16px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.2s;
     }
-  
+
     .btn:hover {
       background-color: #fca311;
+      transform: scale(1.03);
     }
-  
+
     .btn.secondary {
       background-color: #8ecae6;
     }
-  
+
     .container {
       max-width: 800px;
       margin: auto;
@@ -41,101 +42,74 @@
       background: white;
       border-radius: 16px;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, color 0.3s;
     }
-  
+
     nav {
       background-color: #0077b6;
       padding: 15px;
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      transition: background-color 0.3s;
     }
-  
+
     nav div {
       color: white;
       font-size: 20px;
       font-weight: bold;
     }
-  
+
+    #hint-box {
+      background: #f8f9fa;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .grade-detect {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* 🌙 Dark Theme */
+    body.dark-theme {
+      background: linear-gradient(to right, #2b2b2b, #1e1e1e);
+      color: #f0f0f0;
+    }
+
+    body.dark-theme .container {
+      background-color: #2e2e2e;
+      color: #e0e0e0;
+    }
+
+    body.dark-theme nav {
+      background-color: #1f2a48;
+    }
+
+    body.dark-theme .btn {
+      background-color: #00b4d8;
+      color: black;
+    }
+
+    body.dark-theme .btn.secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    body.dark-theme #hint-box {
+      background-color: #3a3a3a;
+      color: #f8f8f8;
+    }
+
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
         align-items: flex-start;
       }
-  
-      .container {
-        padding: 20px 15px;
-        margin: 10px;
-      }
-  
-      h2 {
-        font-size: 1.5rem;
-      }
-  
-      input, select, .btn, audio {
-        width: 100% !important;
-        margin: 6px 0 !important;
-      }
-  
-      .btn.secondary {
-        margin-left: 0 !important;
-      }
-  
-      .text-center.mt-4 .btn {
-        margin-bottom: 10px;
-      }
-    }
-  
-    /* 🌙 Dark Theme Support */
-    body.dark-theme {
-      background: linear-gradient(to right, #2b2b2b, #1e1e1e);
-      color: #f0f0f0;
-    }
-  
-    body.dark-theme .container {
-      background-color: #2e2e2e;
-      color: #e0e0e0;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
-    }
-  
-    body.dark-theme nav {
-      background-color: #1f2a48;
-    }
-  
-    body.dark-theme .btn {
-      background-color: #00b4d8;
-      color: black;
-    }
-  
-    body.dark-theme .btn.secondary {
-      background-color: #6c757d;
-      color: white;
-    }
-  
-    body.dark-theme input,
-    body.dark-theme select {
-      background-color: #1e1e1e;
-      color: #ffffff;
-      border: 1px solid #555;
-    }
-  
-    body.dark-theme .alert {
-      background-color: #333;
-      border-color: #444;
-      color: #f8f9fa;
-    }
-  
-    body.dark-theme #hint-box {
-      background-color: #3a3a3a;
-      color: #f8f8f8;
     }
   </style>
-  
 </head>
-
 <body>
   <!-- 🔝 Navbar -->
   <nav>
@@ -149,14 +123,18 @@
   <div class="container">
     <h2 class="text-center mb-4">🧠 Get Step-by-Step Hints</h2>
 
+    <!-- ⚠️ Offline Warning -->
+    <div id="offlineBanner" class="alert alert-warning text-center" style="display:none;">
+      ⚠️ You're offline. Using fallback hints.
+    </div>
+
+    <!-- ✅ Grade Detection Message -->
+    <div id="gradeMessage" class="grade-detect" style="display:none;"></div>
+
     <!-- 📝 Start New Hint -->
-    <form action="/start-hint" method="POST" class="text-center mb-4">
-      <input type="text" name="problem" placeholder="Type your math problem..." required
-             class="form-control mb-2" style="max-width: 100%; padding: 10px; border-radius: 10px;">
-      <select name="grade" class="form-control mb-2" style="max-width: 100%; padding: 10px; border-radius: 10px;">
-        <option value="4">Grade 4</option>
-        <option value="5">Grade 5</option>
-      </select>
+    <form id="hintForm" action="/start-hint" method="POST" class="text-center mb-4">
+      <input type="text" name="problem" id="problemInput" placeholder="Type your math problem..." required class="form-control mb-2">
+      <input type="hidden" name="grade" id="gradeInput" value="5">
       <button type="submit" class="btn">🎯 Start Hinting</button>
     </form>
 
@@ -166,8 +144,8 @@
     </div>
     {% endif %}
 
-    <!-- 🔍 Hint Output -->
-    <div id="hint-box" class="p-3 bg-light border rounded">
+    <!-- 🔍 Hints -->
+    <div id="hint-box">
       {% if step < 5 %}
         <p><strong>💡 Hint {{ step }}:</strong> {{ hint }}</p>
       {% elif step == 5 %}
@@ -175,87 +153,149 @@
       {% endif %}
     </div>
 
-    {% if step < 5 %}
-    <div class="text-center mt-3">
-      <button id="next-hint-btn" class="btn btn-primary">➡️ Show Next Hint</button>
+    <!-- 🔢 Step Counter -->
+    <div class="text-center mt-2">
+      <p>Step <span id="stepCounter">{{ step }}</span> of 5</p>
     </div>
-    {% endif %}
 
-    <!-- 🔊 Audio Buttons -->
+    <!-- ⏮⏭ Hint Navigation -->
+    <div class="text-center mt-3">
+      <button id="prev-hint-btn" class="btn btn-secondary">⏮ Previous Hint</button>
+      {% if step < 5 %}
+        <button id="next-hint-btn" class="btn btn-primary">➡️ Show Next Hint</button>
+      {% endif %}
+    </div>
+
+    <!-- 🔊 Audio Controls -->
     <div class="text-center mt-4">
+      <progress id="audioProgress" value="0" max="1" style="width:100%; display:none;"></progress>
       <audio id="feedbackAudio" controls style="display:none;"></audio>
-      <button onclick="playEnglishAudio()" class="btn">🔊 Play English</button>
-      <button onclick="playHindiAudio()" class="btn">🗣️ Speak Hindi</button>
-      <button onclick="stopAudio()" class="btn">⏹️ Stop Audio</button>
-      <a href="/" class="btn">🔙 Back to Home</a>
+      <button onclick="playEnglishAudio()" class="btn">🔊 English</button>
+      <button onclick="playHindiAudio()" class="btn">🗣️ Hindi</button>
+      <button onclick="stopAudio()" class="btn">⏹️ Stop</button>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="/static/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    let currentStep = parseInt("{{ step | default(1) }}");
-    let englishAudioPath = "";
-    let hindiAudioPath = "";
+ <!-- Only the script part is changed -->
+<script>
+  let currentStep = parseInt("{{ step | default(1) }}");
+  let englishAudioPath = "";
+  let hindiAudioPath = "";
 
-    $("#next-hint-btn").click(function () {
-      $.post("/next-hint-legacy", {}, function (data) {
-        currentStep = data.step;
-        const hintBox = document.getElementById("hint-box");
+  // Grade Detection
+  const problemInput = document.getElementById("problemInput");
+  const gradeInput = document.getElementById("gradeInput");
+  const gradeMessage = document.getElementById("gradeMessage");
 
-        if (currentStep === 5) {
-          $("#next-hint-btn").hide();
-          hintBox.innerHTML += `<p><strong>✅ Final Answer:</strong> ${data.hint}</p>`;
-        } else {
-          hintBox.innerHTML += `<p><strong>💡 Hint ${data.step}:</strong> ${data.hint}</p>`;
-        }
+  const gradeKeywords = {
+    1: ["add", "+",  "plus", "subtract", "-", "count", "more than", "less than", "take away"],
+    2: ["double", "half", "even", "odd", "number line", "tens"],
+    3: ["multiply", "*", "divide","/", "sharing", "equal parts", "table of", "groups of"],
+    4: ["area", "perimeter", "fraction", "angle", "symmetry"],
+    5: ["percentage", "decimal", "volume", "algebra", "LCM", "HCF", "average"]
+  };
 
-        englishAudioPath = "/" + data.audio;
-        hindiAudioPath = "/" + data.hindi_audio;
-
-        const audio = document.getElementById("feedbackAudio");
-        audio.src = englishAudioPath + "?t=" + new Date().getTime();
-        audio.style.display = "block";
-      });
-    });
-
-    function playEnglishAudio() {
-      const audio = document.getElementById("feedbackAudio");
-      if (!englishAudioPath) {
-        alert("❌ English audio not available.");
-        return;
+  function guessGrade(text) {
+    text = text.toLowerCase();
+    for (let grade = 1; grade <= 5; grade++) {
+      for (let keyword of gradeKeywords[grade]) {
+        if (text.includes(keyword)) return grade;
       }
+    }
+    return 5;
+  }
+
+  function updateGradeDetection() {
+    const text = problemInput.value;
+    const grade = guessGrade(text);
+    gradeInput.value = grade;
+    gradeMessage.style.display = 'block';
+    gradeMessage.innerText = `🧩 Detected Grade: ${grade}`;
+  }
+
+  problemInput.addEventListener("input", updateGradeDetection);
+  document.getElementById("hintForm").addEventListener("submit", updateGradeDetection);
+
+  // 🟡 NEXT Hint Logic – Replace hint box content
+  $("#next-hint-btn").click(function () {
+    $.post("/next-hint-legacy", {}, function (data) {
+      currentStep = data.step;
+      document.getElementById("hint-box").innerHTML = currentStep === 5
+        ? `<p><strong>✅ Final Answer:</strong> ${data.hint}</p>`
+        : `<p><strong>💡 Hint ${data.step}:</strong> ${data.hint}</p>`;
+
+      document.getElementById("stepCounter").innerText = currentStep;
+
+      englishAudioPath = "/" + data.audio;
+      hindiAudioPath = "/" + data.hindi_audio;
+
+      const audio = document.getElementById("feedbackAudio");
       audio.src = englishAudioPath + "?t=" + new Date().getTime();
-      audio.play();
-    }
+      audio.style.display = "block";
+      document.getElementById("audioProgress").style.display = "block";
 
-    function playHindiAudio() {
-      const audio = document.getElementById("feedbackAudio");
-      if (!hindiAudioPath) {
-        alert("❌ Hindi audio not available.");
-        return;
+      if (currentStep === 5) {
+        $("#next-hint-btn").hide();
       }
-      audio.src = hindiAudioPath + "?t=" + new Date().getTime();
-      audio.play();
+    });
+  });
+
+  // 🔁 PREVIOUS Hint Logic – Replace current hint only
+  $("#prev-hint-btn").click(function () {
+    $.post("/previous-hint", {}, function (data) {
+      currentStep = data.step;
+      document.getElementById("hint-box").innerHTML =
+        `<p><strong>💡 Hint ${data.step}:</strong> ${data.hint}</p>`;
+      document.getElementById("stepCounter").innerText = currentStep;
+    });
+  });
+
+  function playEnglishAudio() {
+    const audio = document.getElementById("feedbackAudio");
+    if (!englishAudioPath) return alert("❌ English audio not available.");
+    audio.src = englishAudioPath + "?t=" + new Date().getTime();
+    audio.play();
+  }
+
+  function playHindiAudio() {
+    const audio = document.getElementById("feedbackAudio");
+    if (!hindiAudioPath) return alert("❌ Hindi audio not available.");
+    audio.src = hindiAudioPath + "?t=" + new Date().getTime();
+    audio.play();
+  }
+
+  function stopAudio() {
+    const audio = document.getElementById("feedbackAudio");
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  // Audio progress
+  const audio = document.getElementById("feedbackAudio");
+  const progress = document.getElementById("audioProgress");
+  audio.addEventListener("timeupdate", () => {
+    if (audio.duration > 0) {
+      progress.value = audio.currentTime / audio.duration;
     }
+  });
 
-    function stopAudio() {
-      const audio = document.getElementById("feedbackAudio");
-      audio.pause();
-      audio.currentTime = 0;
-    }
+  // 🌙 Theme Toggle
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  }
 
-    // 🌙 Dark Mode Toggle System
-function toggleTheme() {
-  document.body.classList.toggle("dark-theme");
-  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
-}
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-theme");
+  }
 
-// 🌓 Apply saved theme on load
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-theme");
-}
-  </script>
+  // 🔌 Offline warning
+  if (!navigator.onLine) {
+    document.getElementById("offlineBanner").style.display = "block";
+  }
+</script>
+
 </body>
 </html>

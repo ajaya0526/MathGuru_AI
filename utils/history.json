@@ -1,134 +1,62 @@
 [
     {
-        "expression": "Add 4 & 5",
+        "expression": "Find LCM of 6 and 9",
         "result": "",
-        "hint": "💡 Hint 1:  Think about counting on your fingers!  Start with 4 fingers up, then add 5 more. How many fingers are up in total?",
-        "timestamp": "2025-05-23 04:58:16"
+        "hint": "💡 Hint 1: Step 1: Add all values a + b + c.",
+        "timestamp": "2025-06-03 13:10:47"
     },
     {
-        "expression": "Add 4 & 5",
+        "expression": "add 3 and 4",
         "result": "",
-        "hint": "💡 Hint 2:  Think about counting on your fingers! Start with 4 fingers up, then add 5 more. How many fingers are up in total?",
-        "timestamp": "2025-05-23 04:58:23"
+        "hint": "💡 Hint 1: 💡 Hint 1: This is an addition problem.",
+        "timestamp": "2025-06-03 13:11:57"
     },
     {
-        "expression": "Add 4 & 5",
-        "result": "9",
-        "hint": "",
-        "timestamp": "2025-05-23 04:58:47"
-    },
-    {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "💡 Hint 1:  Hey there!  See those two numbers, 45 and 30?  Why don't you add them together first? That will make the problem much simpler!",
-        "timestamp": "2025-05-23 05:36:40"
-    },
-    {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "",
-        "timestamp": "2025-05-23 05:37:24"
-    },
-    {
-        "expression": "3 add 4",
+        "expression": "measure length using ruler",
         "result": "",
-        "hint": "💡 Hint 1:  Think about putting 3 apples together with 4 apples. How many apples do you have in total?",
-        "timestamp": "2025-05-23 05:57:34"
+        "hint": "💡 Hint 1: Place the ruler's 0 mark at the start point.",
+        "timestamp": "2025-06-03 13:44:32"
     },
     {
-        "expression": "6+7+7",
-        "result": "",
-        "hint": "💡 Hint 1: Hey there, math whiz!  Notice anything special about the numbers 7 and 7?  Adding the same number twice is like multiplying, you know!",
-        "timestamp": "2025-05-23 06:02:58"
+        "expression": "C कर्ज 2\np हू",
+        "result": "Offline Mode",
+        "hint": "💡 Hint 1: Try identifying what operation is required first.",
+        "timestamp": "2025-06-03 14:15:45"
     },
     {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "💡 Hint 1: Hey there, math whiz!  See those numbers, 45 and 30?  Why don't you add them together first to make the problem a little simpler?",
-        "timestamp": "2025-05-23 06:03:25"
-    },
-    {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "💡 Hint 2:  Hey there!  See those two numbers, 45 and 30?  Why don't you add them together first?  That might make the problem a little easier to solve!",
-        "timestamp": "2025-05-23 06:03:38"
-    },
-    {
-        "expression": "3 + 3",
-        "result": "6",
-        "hint": "💡 Hint 1:  Think about how many you have if you have three apples, and then someone gives you three more!",
-        "timestamp": "2025-05-23 06:04:38"
-    },
-    {
-        "expression": "3 + 3",
-        "result": "6",
-        "hint": "💡 Hint 2:  Think about how many you would have if you had three apples, and then someone gave you three more!",
-        "timestamp": "2025-05-23 06:04:40"
-    },
-    {
-        "expression": "3 + 3",
-        "result": "6",
-        "hint": "💡 Hint 3:  Think about how many you would have if you had three apples, and then someone gave you three more!",
-        "timestamp": "2025-05-23 06:04:55"
+        "expression": "C कर्ज 2\np हू",
+        "result": "Offline Mode",
+        "hint": "💡 Hint 2: Try identifying what operation is required first.",
+        "timestamp": "2025-06-03 14:15:46"
     },
     {
         "expression": "x + 45 + 30 = 180",
         "result": "x = 105",
-        "hint": "💡 Hint 1: Hey there, math whiz!  Try adding 45 and 30 together first.  That will make the problem a little simpler!",
-        "timestamp": "2025-05-23 06:10:39"
+        "hint": "💡 Hint 1:  Hey there!  See those numbers, 45 and 30?  Why don't you add them together first to make the problem a little simpler?",
+        "timestamp": "2025-06-03 14:52:33"
     },
     {
         "expression": "x + 45 + 30 = 180",
         "result": "x = 105",
-        "hint": "💡 Hint 2:  Hey there, math whiz!  Try adding the numbers you already know together first.  That will make things much simpler!",
-        "timestamp": "2025-05-23 06:10:44"
+        "hint": "💡 Hint 2:  Hey there!  See those two numbers, 45 and 30?  Why don't you add them together first? That will make the problem much simpler!",
+        "timestamp": "2025-06-03 14:52:33"
     },
     {
         "expression": "x + 45 + 30 = 180",
         "result": "x = 105",
-        "hint": "💡 Hint 3:  Hey there!  See those two numbers, 45 and 30?  Why don't you add them together first? That will make the problem much simpler!",
-        "timestamp": "2025-05-23 06:11:14"
+        "hint": "💡 Hint 3:  Hey there,  see if you can add 45 and 30 together first!  That will make the problem a bit easier to solve.",
+        "timestamp": "2025-06-03 14:52:39"
     },
     {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "",
-        "timestamp": "2025-05-23 06:11:47"
+        "expression": "2a + 3 = 9",
+        "result": "a = 3",
+        "hint": "💡 Hint 1:  Hey there!  Think about what number you could put in place of 'a' to make the whole equation true.  Try to get '2a' by itself first – what's the opposite of adding 3?",
+        "timestamp": "2025-06-03 14:58:15"
     },
     {
-        "expression": "6+7+7",
-        "result": "",
-        "hint": "💡 Hint 1: Hey there,  notice anything similar in the numbers?  Maybe you can group them together to make it easier!",
-        "timestamp": "2025-05-23 06:14:36"
-    },
-    {
-        "expression": "6+7+7",
-        "result": "20",
-        "hint": "",
-        "timestamp": "2025-05-23 06:14:54"
-    },
-    {
-        "expression": "x + 45 + 30 = 180",
-        "result": "x = 105",
-        "hint": "💡 Hint 1:  Hey there, math whiz!  See those numbers, 45 and 30?  Why don't you add them together first? That will make the problem much simpler!",
-        "timestamp": "2025-05-23 06:16:51"
-    },
-    {
-        "expression": "3 +4",
-        "result": "",
-        "hint": "💡 Hint 1:  Think about how many fingers you have on one hand, and then how many you'd have if you added the fingers on another hand partway.",
-        "timestamp": "2025-05-23 06:28:15"
-    },
-    {
-        "expression": "3 +4",
-        "result": "7",
-        "hint": "",
-        "timestamp": "2025-05-23 06:28:37"
-    },
-    {
-        "expression": "3 + 3",
-        "result": "6",
-        "hint": "💡 Hint 1:  Think about how many you have if you start with three apples and then someone gives you three more!",
-        "timestamp": "2025-05-23 06:31:40"
+        "expression": "2a + 3 = 9",
+        "result": "a = 3",
+        "hint": "💡 Hint 2:  Think about what number you could put in place of 'a' that, when you multiply it by 2 and then add 3, would give you a total of 9.  Try working backwards!",
+        "timestamp": "2025-06-03 14:58:19"
     }
 ]

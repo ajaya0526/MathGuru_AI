@@ -98,74 +98,78 @@
 </div>
 
 <script>
-let stream, currentAudio = null, audioEn = '', audioHi = '';
-
-function toggleTheme() {
-  document.body.classList.toggle("dark-theme");
-  localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
-}
-if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-theme");
-
-async function startCamera() {
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-    document.getElementById('camera').srcObject = stream;
-    document.getElementById('camera').style.display = 'block';
-    document.getElementById('solveBtn').style.display = 'inline-block';
-  } catch (err) {
-    document.getElementById('camera').style.display = 'none';
-    document.getElementById('solveBtn').style.display = 'none';
-    document.getElementById('fallbackNotice').style.display = 'block';
-    document.getElementById('fileInput').style.display = 'block';
+  let stream, currentAudio = null;
+  
+  function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
   }
-}
-
-document.getElementById("openCameraBtn").addEventListener("click", startCamera);
-
-document.getElementById("solveBtn").addEventListener("click", () => {
-  const video = document.getElementById("camera");
-  const canvas = document.getElementById("snapshot");
-  const img = document.getElementById("capturedImage");
-  const ctx = canvas.getContext("2d");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  img.src = canvas.toDataURL("image/jpeg");
-  img.style.display = 'block';
-
-  canvas.toBlob(blob => {
-    const formData = new FormData();
-    formData.append("image", blob, "capture.jpg");
-
-    fetch("/upload", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("text").innerText = data.extracted || "---";
-      document.getElementById("result").innerText = data.result || "--";
-      document.getElementById("steps").innerText = data.steps || "No explanation.";
-      audioEn = '/' + data.audio_en;
-      audioHi = '/' + data.audio_hi;
-      document.getElementById("audioControls").style.display = "block";
-    });
-  }, "image/jpeg");
-});
-
-function playAudio(src) {
-  stopAudio();
-  currentAudio = new Audio(src);
-  currentAudio.play();
-}
-function stopAudio() {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
+  if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-theme");
+  
+  async function startCamera() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+      const video = document.getElementById("camera");
+      video.srcObject = stream;
+      video.style.display = 'block';
+      document.getElementById("solveBtn").style.display = 'inline-block';
+    } catch (err) {
+      document.getElementById("fallbackNotice").style.display = 'block';
+      document.getElementById("fileInput").style.display = 'block';
+    }
   }
-}
-</script>
+  
+  document.getElementById("openCameraBtn").addEventListener("click", startCamera);
+  
+  document.getElementById("solveBtn").addEventListener("click", () => {
+    const video = document.getElementById("camera");
+    const canvas = document.getElementById("snapshot");
+    const ctx = canvas.getContext("2d");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+    canvas.toBlob(blob => {
+      const formData = new FormData();
+      formData.append("image", blob, "capture.jpg");
+  
+      fetch("/upload", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("capturedImage").src = canvas.toDataURL("image/jpeg");
+        document.getElementById("capturedImage").style.display = "block";
+        document.getElementById("text").innerText = data.extracted || "---";
+        document.getElementById("result").innerText = data.result || "--";
+        document.getElementById("steps").innerText = data.steps || "No explanation.";
+  
+        // Store returned audio paths
+        currentAudioPaths.en = data.audio_en;
+        currentAudioPaths.hi = data.audio_hi;
+        document.getElementById("audioControls").style.display = "block";
+      });
+    }, "image/jpeg", 0.9);
+  });
+  
+  let currentAudioPaths = { en: "", hi: "" };
+  
+  function playAudio(src) {
+    stopAudio();
+    currentAudio = new Audio(src);
+    currentAudio.play();
+  }
+  
+  function stopAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      currentAudio = null;
+    }
+  }
+  </script>
+  
 
 </body>
 </html>

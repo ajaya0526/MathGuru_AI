@@ -35,34 +35,37 @@ except Exception as e:
     print("[TEMPLATE LOAD ERROR]:", e)
     predefined_templates = {}
 
-# 📘 Pattern matching for template keys
+# 📘 Pattern-based template match
 def match_template(question):
     q = question.lower().strip()
-
-    # Normalize digits and variables for pattern matching
-    q = re.sub(r"\d+", "n", q)         # Replace all numbers with 'n'
-    q = re.sub(r"[a-z]", "x", q)       # Replace all letters with 'x'
-    q = re.sub(r"\s+", " ", q)         # Normalize spaces
+    q = re.sub(r"\d+", "n", q)
+    q = re.sub(r"[a-z]", "x", q)
+    q = re.sub(r"\s+", " ", q)
 
     if "lcm of n and n" in q:
         return "lcm of a and b"
     elif "area of triangle" in q:
-        return "what is the area of a triangle with base b and height h"
+        return "area of triangle"
     elif "simplify (x+x)(x+x)" in q:
         return "simplify (x + a)(x + b)"
     elif "n x + n = n" in q or "n x - n = n" in q:
-        return "solve the equation ax + b = c"
+        return "solve ax + b = c"
     elif "how many apples" in q:
         return "how many apples does sam have"
     elif "percentage of n" in q or "what is the percentage of n" in q:
         return "percentage of a number"
-    elif re.fullmatch(r"(n\s*\+\s*)+n", q):  # matches "n + n", "n + n + n"
+    elif re.fullmatch(r"(n\s*\+\s*)+n", q):
         return "add two numbers"
-    elif re.search(r"\+.*\*", q) or re.search(r"\*.*\+", q):  # "6 + 7 * 7"
+    elif re.search(r"\+.*\*", q) or re.search(r"\*.*\+", q):
         return "mixed operation"
     return None
 
-
+# 🔍 Fuzzy match if pattern doesn't match
+def fuzzy_match_template(question, templates):
+    keys = list(templates.keys())
+    question = question.lower().strip()
+    matches = difflib.get_close_matches(question, keys, n=1, cutoff=0.4)
+    return matches[0] if matches else None
 
 # 📦 Conversation State
 conversation = {
@@ -80,14 +83,21 @@ def reset_conversation():
 
 # 🎯 Offline Fallback Hint System
 def offline_hint(question, step):
-    key = match_template(question) or question.lower().strip()
+    key = match_template(question)
+    if not key:
+        key = fuzzy_match_template(question, predefined_templates)
+    if not key:
+        key = question.lower().strip()
+
+    print(f"[Offline Mode] Matched template key: {key}")
+
     if key in predefined_templates:
         hints = predefined_templates[key]
         if step <= len(hints):
             return f"💡 Hint {step}: {hints[step - 1]}"
         else:
             return f"✅ You’ve received all hints. Try solving now."
-    # Generic fallback
+
     if "add" in key or "+" in key:
         return f"💡 Hint {step}: Try lining up the numbers and adding each column."
     elif "subtract" in key or "-" in key:

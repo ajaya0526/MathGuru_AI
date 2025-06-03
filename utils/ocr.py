@@ -7,18 +7,17 @@ import socket
 import google.generativeai as genai
 from dotenv import load_dotenv
 from datetime import datetime
+import time
 
 # 🔐 Load and configure Gemini
 load_dotenv()
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-# 🧠 Initialize EasyOCR reader
+# 🧠 EasyOCR reader
 reader = easyocr.Reader(['en', 'hi'], gpu=False)
 
-# 📁 Log file for OCR
+# 🧾 Logging setup
 LOG_PATH = "ocr_log.txt"
-
-# 📝 Logging utility
 def log(msg):
     try:
         with open(LOG_PATH, "a", encoding="utf-8") as f:
@@ -26,7 +25,7 @@ def log(msg):
     except Exception as e:
         print("[LOGGING ERROR]:", e)
 
-# 🌐 Check internet connection
+# 🌐 Internet check
 def is_internet_available():
     try:
         socket.create_connection(("8.8.8.8", 53), timeout=2)
@@ -34,7 +33,21 @@ def is_internet_available():
     except:
         return False
 
-# 🧪 Image preprocessing
+# 🧹 Clean old audio
+def clean_old_audio(folder="static/audio", max_age_sec=3600):
+    now = time.time()
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    for filename in os.listdir(folder):
+        path = os.path.join(folder, filename)
+        if os.path.isfile(path) and filename.endswith(".mp3"):
+            if now - os.path.getmtime(path) > max_age_sec:
+                try:
+                    os.remove(path)
+                except Exception as e:
+                    print(f"[CLEANUP ERROR] {e}")
+
+# 🧪 Preprocess image
 def preprocess(image_path):
     try:
         img = cv2.imread(image_path)
@@ -46,11 +59,13 @@ def preprocess(image_path):
         log(f"[PREPROCESS ERROR]: {e}")
         return cv2.imread(image_path)
 
-# 📷 Main OCR function (hybrid)
+# 🔍 Main OCR logic
 def extract_text(image_path):
+    clean_old_audio()  # 🧹 Clear old files first
+
     results = {}
 
-    # ✅ 1. Try Gemini (only if online)
+    # 1. Gemini
     if is_internet_available():
         try:
             with open(image_path, "rb") as f:
@@ -65,7 +80,7 @@ def extract_text(image_path):
         except Exception as e:
             log(f"[Gemini Error]: {e}")
 
-    # ✅ 2. Try Tesseract
+    # 2. Tesseract
     try:
         img = preprocess(image_path)
         tess = pytesseract.image_to_string(img, config="--psm 6", lang='eng+hin')
@@ -75,7 +90,7 @@ def extract_text(image_path):
     except Exception as e:
         log(f"[Tesseract Error]: {e}")
 
-    # ✅ 3. Try EasyOCR
+    # 3. EasyOCR
     try:
         easy_text = reader.readtext(image_path, detail=0)
         joined = " ".join(easy_text).strip()
@@ -85,11 +100,10 @@ def extract_text(image_path):
     except Exception as e:
         log(f"[EasyOCR Error]: {e}")
 
-    # ✅ 4. Return first valid match
+    # 4. Return first good result
     for engine in ["Gemini", "Tesseract", "EasyOCR"]:
         if engine in results and re.search(r"[\d\+\-\*/=xX÷×]", results[engine]):
             return results[engine]
 
-    # ❌ No valid result
     log("[FAIL] No valid math expression found.")
     return "❌ No valid math expression found. Please try again."

@@ -3,6 +3,8 @@ final_answer_cache = {}
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from utils.history import load_history, save_history  
 import os
+import threading
+import time
 from werkzeug.utils import secure_filename
 import re
 
@@ -13,11 +15,16 @@ from utils.feedback import evaluate_and_speak, save_feedback
 from utils.auth import check_login, register_user, reset_password
 from utils.khanflow import get_khan_hint
 from utils.history import save_history, load_history
+from utils.cleanup import clean_old_audio
+
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['AUDIO_FOLDER'] = 'static/audio'
 app.secret_key = 'mathguru-secret-key'
+# 🧹 Clean old audio files once at app startup
+clean_old_audio()
+
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['AUDIO_FOLDER'], exist_ok=True)
@@ -457,7 +464,13 @@ def hint_audio():
             "error": "❌ Failed to generate hint audio."
         })
     
-    
+def run_periodic_cleanup(interval=3600):  # every 1 hour
+    while True:
+        clean_old_audio()
+        time.sleep(interval)
+
+# Start cleanup thread in the background
+threading.Thread(target=run_periodic_cleanup, daemon=True).start()   
     
 
 
