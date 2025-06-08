@@ -5,9 +5,10 @@ Werkzeug==2.3.7
 # --- Environment ---
 python-dotenv==1.0.1
 
-# --- OCR & Image Processing (Tesseract only) ---
+# --- OCR & Image Processing ---
 opencv-python==4.9.0.80
 pytesseract==0.3.10
+easyocr==1.7.1
 
 # --- AI & NLP ---
 google-generativeai==0.3.2
@@ -16,6 +17,11 @@ num2words==0.5.12
 gTTS==2.5.1
 googletrans==4.0.0-rc1
 pyttsx3==2.90
+
+# --- PyTorch (required by EasyOCR) ---
+torch==2.2.1
+torchvision==0.17.1
+torchaudio==2.2.1
 
 # --- Utilities ---
 numpy==1.26.4
