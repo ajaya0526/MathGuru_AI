@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+uploads/
+static/audio/
+ocr_log.txt
+feedback_log.txt
