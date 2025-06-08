@@ -2,7 +2,6 @@ import os
 import re
 import cv2
 import pytesseract
-import easyocr
 import socket
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -13,8 +12,14 @@ import time
 load_dotenv()
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-# 🧠 EasyOCR reader
-reader = easyocr.Reader(['en', 'hi'], gpu=False)
+# 🧠 Lazy-load EasyOCR
+reader = None
+def get_easyocr_reader():
+    global reader
+    if reader is None:
+        import easyocr
+        reader = easyocr.Reader(['en', 'hi'], gpu=False)
+    return reader
 
 # 🧾 Logging setup
 LOG_PATH = "ocr_log.txt"
@@ -92,6 +97,7 @@ def extract_text(image_path):
 
     # 3. EasyOCR
     try:
+        reader = get_easyocr_reader()
         easy_text = reader.readtext(image_path, detail=0)
         joined = " ".join(easy_text).strip()
         if joined:
