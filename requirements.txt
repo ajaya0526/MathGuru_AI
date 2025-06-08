@@ -16,18 +16,15 @@ sympy==1.12
 num2words==0.5.12
 gTTS==2.5.1
 googletrans==4.0.0-rc1
+pyttsx3==2.90
 
-pyttsx3==2.90  # ✅ Fixed here
-
-# --- PyTorch (for EasyOCR) ---
+# --- PyTorch (required by EasyOCR) ---
 torch==2.2.1
 torchvision==0.17.1
 torchaudio==2.2.1
 
 # --- Utilities ---
 numpy==1.26.4
-pytest==8.1.1
-
 
 # --- Deployment ---
-gunicorn
+gunicorn==21.2.0
