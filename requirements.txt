@@ -1,16 +1,24 @@
+# --- Web Framework ---
 Flask==2.3.3
 Werkzeug==2.3.7
+
+# --- Environment ---
 python-dotenv==1.0.1
 
-# OCR with Tesseract (lightweight)
+# --- OCR & Image Processing (Tesseract only) ---
 opencv-python==4.9.0.80
 pytesseract==0.3.10
 
-# AI (online)
+# --- AI & NLP ---
 google-generativeai==0.3.2
-
-# Utilities
 sympy==1.12
 num2words==0.5.12
+gTTS==2.5.1
+googletrans==4.0.0-rc1
 pyttsx3==2.90
+
+# --- Utilities ---
+numpy==1.26.4
+
+# --- Deployment ---
 gunicorn==21.2.0
