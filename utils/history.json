@@ -58,5 +58,11 @@
         "result": "a = 3",
         "hint": "💡 Hint 2:  Think about what number you could put in place of 'a' that, when you multiply it by 2 and then add 3, would give you a total of 9.  Try working backwards!",
         "timestamp": "2025-06-03 14:58:19"
+    },
+    {
+        "expression": "6+7+7",
+        "result": "",
+        "hint": "💡 Hint 1: Hey there!  See if you can add the two sevens together first. That might make the problem a bit easier!",
+        "timestamp": "2025-06-08 15:59:15"
     }
 ]

@@ -256,14 +256,15 @@
 
 <script>
   let hintHistory = [], currentHintIndex = -1;
-  let hintAudioEn = '', hintAudioHi = '';
+  let hintAudioEn = null, hintAudioHi = null;
   let finalAudioEn = '', finalAudioHi = '';
   let currentAudio = null;
-  
+
   function toggleTheme() {
     document.body.classList.toggle("dark-theme");
     localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
   }
+
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-theme");
   }
@@ -271,17 +272,27 @@
   function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('show');
   }
-  
-  function playHintAudio(lang) {
+
+  async function playHintAudio(lang) {
+    const hint = document.getElementById("hintText").innerText;
+    const response = await fetch('/hint_audio', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hint })
+    });
+    const data = await response.json();
     stopAudio();
-    currentAudio = new Audio(lang === 'en' ? hintAudioEn : hintAudioHi);
+    const src = lang === 'en' ? data.audio_en : data.audio_hi;
+    currentAudio = new Audio('/' + src);
     currentAudio.play();
   }
+
   function playFinalAudio(lang) {
     stopAudio();
     currentAudio = new Audio(lang === 'en' ? finalAudioEn : finalAudioHi);
     currentAudio.play();
   }
+
   function stopAudio() {
     if (currentAudio) {
       currentAudio.pause();
@@ -289,20 +300,20 @@
       currentAudio = null;
     }
   }
-  
+
   function updateHintDisplay() {
     document.getElementById('hintText').innerText = hintHistory[currentHintIndex];
     document.getElementById('prevHintBtn').style.display = currentHintIndex > 0 ? "inline-block" : "none";
     document.getElementById('audioControls').style.display = "block";
   }
-  
+
   document.getElementById('prevHintBtn').addEventListener("click", () => {
     if (currentHintIndex > 0) {
       currentHintIndex--;
       updateHintDisplay();
     }
   });
-  
+
   async function getNextHint() {
     const response = await fetch('/next_hint', {
       method: 'POST',
@@ -314,12 +325,11 @@
       hintHistory.push(data.hint);
       currentHintIndex++;
       updateHintDisplay();
-  
-      hintAudioEn = '/' + data.audio_en;
-      hintAudioHi = '/' + data.audio_hi;
+      hintAudioEn = null;
+      hintAudioHi = null;
     }
   }
-  
+
   async function getFinalAnswer() {
     const response = await fetch('/final_answer', {
       method: 'POST',
@@ -328,25 +338,23 @@
     });
     const data = await response.json();
     alert("✅ Final answer and explanation generated successfully!");
-  
     document.getElementById('result').innerText = data.answer || '--';
     document.getElementById('steps').innerText = `🧠 Final Explanation:\n${data.explanation || '--'}`;
-  
     finalAudioEn = '/' + data.audio_en;
     finalAudioHi = '/' + data.audio_hi;
     document.getElementById("finalAudioControls").style.display = "block";
   }
-  
+
   document.getElementById("uploadForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const file = document.getElementById("uploadFile").files[0];
     const img = document.getElementById("previewImage");
     img.src = URL.createObjectURL(file);
     img.style.display = "block";
-  
+
     const formData = new FormData();
     formData.append("file", file);
-  
+
     fetch("/scan_image", {
       method: "POST",
       body: formData
@@ -359,12 +367,11 @@
         hintHistory = [data.hint];
         currentHintIndex = 0;
         updateHintDisplay();
-  
-        hintAudioEn = '/' + data.audio_en;
-        hintAudioHi = '/' + data.audio_hi;
+        hintAudioEn = null;
+        hintAudioHi = null;
       });
   });
-  
+
   document.getElementById("manualForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const expression = document.getElementById("manualInput").value.trim();
@@ -381,12 +388,12 @@
         hintHistory = [data.hint];
         currentHintIndex = 0;
         updateHintDisplay();
-  
-        hintAudioEn = '/' + data.audio_en;
-        hintAudioHi = '/' + data.audio_hi;
+        hintAudioEn = null;
+        hintAudioHi = null;
       });
   });
-  </script>
+</script>
+
   </body>
   </html>
   

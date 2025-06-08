@@ -126,8 +126,15 @@ def manual_input():
         hint = get_next_hint(expression)
 
         # 🔊 Generate hint audio
-        audio_en = synthesize_english_audio(hint)
-        audio_hi = synthesize_hindi_audio(hint)
+        #audio_en = synthesize_english_audio(hint)
+        #audio_hi = synthesize_hindi_audio(hint)
+        # ⏩ Skip audio generation. Audio will be requested separately.
+        return jsonify({
+    'extracted': expression,
+    'hint': hint
+    })
+
+
 
         # Save history
         save_history(expression, "", hint)
@@ -170,8 +177,15 @@ def scan_image():
         hint = get_next_hint(extracted)
         result = get_final_solution(extracted)
 
-        audio_en = synthesize_english_audio(result["answer"])
-        audio_hi = synthesize_hindi_audio(result["answer"])
+        #audio_en = synthesize_english_audio(result["answer"])
+        #audio_hi = synthesize_hindi_audio(result["answer"])
+        return jsonify({
+    "extracted": extracted,
+    "hint": hint,
+    "result": result["answer"],
+    "explanation": result["explanation"]
+})
+
 
         # Save history (image scan)
         save_history(extracted, result["answer"], hint)
@@ -224,8 +238,14 @@ def upload_camera_image():
 
         # ✅ Auto-generate Hint 1
         hint1 = get_khan_hint(extracted, 1, "5")
-        audio_en = synthesize_english_audio(hint1)
-        audio_hi = synthesize_hindi_audio(hint1)
+        #audio_en = synthesize_english_audio(hint1)
+        #audio_hi = synthesize_hindi_audio(hint1)
+        return jsonify({
+    'extracted': extracted,
+    'result': result["answer"],
+    'steps': result["steps"],
+    'hint': hint1
+      })
 
         # Evaluate answer for result and steps
         result, audio_path = evaluate_and_speak(extracted)
@@ -261,8 +281,8 @@ def next_hint():
 
         return jsonify({
             "hint": hint,
-            "audio_en": audio_en,
-            "audio_hi": audio_hi
+            #"audio_en": audio_en,
+            #"audio_hi": audio_hi
         })
     except Exception as e:
         print(f"[NEXT HINT ERROR]: {e}")
