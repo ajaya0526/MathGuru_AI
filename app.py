@@ -22,8 +22,12 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['AUDIO_FOLDER'] = 'static/audio'
 app.secret_key = 'mathguru-secret-key'
+app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # Limit upload to 1 MB
+
 # 🧹 Clean old audio files once at app startup
 clean_old_audio()
+extracted = extract_text(image_path)
+
 
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -165,6 +169,8 @@ def scan_image():
         filename = secure_filename(file.filename)
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(image_path)
+        print(f"[INFO] Uploaded file saved: {filename}, size: {round(os.path.getsize(image_path)/1024)} KB")
+
 
         extracted = extract_text(image_path)
         if not extracted or "no valid" in extracted.lower():
