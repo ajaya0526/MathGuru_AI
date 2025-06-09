@@ -26,7 +26,7 @@ app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # Limit upload to 1 MB
 
 # 🧹 Clean old audio files once at app startup
 clean_old_audio()
-extracted = extract_text(image_path)
+#extracted = extract_text(image_path)
 
 
 
